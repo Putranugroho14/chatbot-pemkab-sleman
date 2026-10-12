@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-Bot Agentic AI - Fullscreen Mode</title>
+  <link rel="stylesheet" href="dist/sbot-widget.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .fullscreen-container {
+      width: 100%;
+      height: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    @media (min-width: 900px) {
+      .fullscreen-container {
+        height: 92vh;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+    }
+    .fs-header {
+      background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .fs-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .fs-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .fs-messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .fs-footer {
+      padding: 16px 24px;
+      background: white;
+      border-top: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="fullscreen-container">
+    <div class="fs-header">
+      <div class="fs-profile">
+        <div class="fs-avatar" id="fs-avatar">🤖</div>
+        <div>
+          <h2 style="font-size: 18px; margin: 0; font-weight: 700;" id="fs-title">Pemkab Sleman Agentic AI</h2>
+          <span style="font-size: 12px; opacity: 0.9;" id="fs-subtitle">Didukung RAGFlow & Super Agent Multitenant</span>
+        </div>
+      </div>
+      <div>
+        <a href="/" style="color: white; text-decoration: none; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 8px;">
+          Buka Admin Console ⚙️
+        </a>
+      </div>
+    </div>
+
+    <div class="fs-messages" id="fs-messages"></div>
+
+    <div class="fs-footer">
+      <form id="fs-form" style="display: flex; gap: 10px;">
+        <input type="text" id="fs-input" placeholder="Ketik pertanyaan atau pilih opsi di atas..." style="flex:1; padding: 12px 18px; border: 1.5px solid #cbd5e1; border-radius: 12px; font-size: 14px; outline: none;">
+        <button type="submit" id="fs-send" style="padding: 12px 24px; background: #10b981; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">
+          Kirim
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const agentSlug = urlParams.get('agent') || urlParams.get('data-agent');
+    const tenant = urlParams.get('tenant') || 'sleman-default';
+    const sessionId = 'fs-' + Math.random().toString(36).substr(2, 9);
+
+    const messagesEl = document.getElementById('fs-messages');
+    const inputEl = document.getElementById('fs-input');
+    const formEl = document.getElementById('fs-form');
+    const titleEl = document.getElementById('fs-title');
+    const avatarEl = document.getElementById('fs-avatar');
+
+    function appendMsg(sender, text, quickReplies = []) {
+      const group = document.createElement('div');
+      group.className = 'nyai-msg-group ' + sender;
+      const bubble = document.createElement('div');
+      bubble.className = 'nyai-bubble ' + sender;
+      bubble.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+      group.appendChild(bubble);
+
+      if (quickReplies && quickReplies.length > 0) {
+        const qrWrap = document.createElement('div');
+        qrWrap.className = 'nyai-quick-replies';
+        quickReplies.forEach(qr => {
+          const btn = document.createElement('button');
+          btn.className = 'nyai-chip';
+          btn.textContent = qr;
+          btn.onclick = () => sendMsg(qr);
+          qrWrap.appendChild(btn);
+        });
+        group.appendChild(qrWrap);
+      }
+
+      messagesEl.appendChild(group);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    async function sendMsg(textToSend = null) {
+      const msg = textToSend || inputEl.value.trim();
+      if (!msg) return;
+      inputEl.value = '';
+      appendMsg('user', msg);
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg, sessionId, agentSlug, tenantId: tenant })
+        });
+        const data = await res.json();
+        if (data.reply) {
+          appendMsg('bot', data.reply, data.quick_replies);
+        }
+        if (data.debug && data.debug.routing && data.debug.routing.is_specialized) {
+          titleEl.textContent = data.debug.routing.agent_name;
+          avatarEl.textContent = '🎯';
+        }
+      } catch (e) {
+        appendMsg('bot', 'Gagal menghubungi server.');
+      }
+    }
+
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendMsg();
+    });
+
+    // Initial greeting
+    appendMsg('bot', 'Sugeng rawuh! Selamat datang di Mode Percakapan Layanan AI S-Bot Pemkab Sleman. Silakan pilih topik di bawah ini:', [
+      'KTP-el Baru (Pemula)',
+      'Wisata Jeep Lava Tour Merapi',
+      'Lapor Gangguan Wifi Padukuhan',
+      'Visi Misi Sleman'
+    ]);
+  </script>
+</body>
+</html>

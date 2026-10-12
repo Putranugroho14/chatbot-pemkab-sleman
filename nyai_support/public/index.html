@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-Bot Agentic AI Studio - Pemkab Sleman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🤖</div>
+        <div class="brand-title">
+          <h2>S-Bot Support</h2>
+          <span>AGENTIC AI STUDIO</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-label">Main Menu</div>
+        <a class="nav-item active" data-tab="tab-dashboard">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" data-tab="tab-agents">
+          <span class="icon">🎯</span>
+          <span>Specialized Agents</span>
+          <span class="nav-badge" id="badge-agent-count">3</span>
+        </a>
+        <a class="nav-item" data-tab="tab-test-console">
+          <span class="icon">🧪</span>
+          <span>Test Console</span>
+          <span class="nav-badge" style="background:#10b981; color:white;">Debug</span>
+        </a>
+        <a class="nav-item" data-tab="tab-connectors">
+          <span class="icon">🔌</span>
+          <span>API Connectors</span>
+        </a>
+
+        <div class="menu-label">Monitoring & Inbox</div>
+        <a class="nav-item" data-tab="tab-sessions">
+          <span class="icon">💬</span>
+          <span>Conversation States</span>
+          <span class="nav-badge" id="badge-session-count">0</span>
+        </a>
+        <a class="nav-item" data-tab="tab-logs">
+          <span class="icon">📝</span>
+          <span>Activity Logs</span>
+        </a>
+
+        <div class="menu-label">Integration & Deployment</div>
+        <a class="nav-item" data-tab="tab-ragflow">
+          <span class="icon">🧠</span>
+          <span>RAGFlow & Knowledge</span>
+        </a>
+        <a class="nav-item" data-tab="tab-embed">
+          <span class="icon">📦</span>
+          <span>Embed Widget</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="tenant-badge">
+          <div class="tenant-dot"></div>
+          <div>
+            <div class="tenant-name">Diskominfo Sleman</div>
+            <div class="tenant-sub">Air-Gapped Local Cluster</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="top-header">
+        <div class="page-title">
+          <h3 id="current-page-title">Dashboard Overview</h3>
+          <p id="current-page-sub">Monitoring & Manajemen AI Agent Pemkab Sleman</p>
+        </div>
+        <div class="top-actions">
+          <a href="/demo" target="_blank" class="btn-secondary">
+            <span>🏛️ Buka Web Demo Sleman</span>
+          </a>
+          <a href="/widget/fullscreen.html" target="_blank" class="btn-secondary">
+            <span>↗ Fullscreen Mode</span>
+          </a>
+          <button class="btn-primary" onclick="openNewAgentModal()">
+            <span>+ Buat Agent Baru</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 1: DASHBOARD -->
+      <!-- ========================================================================= -->
+      <section class="tab-content active" id="tab-dashboard">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Specialized Agents</div>
+            <div class="stat-value" id="stat-total-agents">3</div>
+            <div class="stat-desc">🎯 3 Aktif melayani warga</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">API Connectors Terhubung</div>
+            <div class="stat-value" id="stat-total-connectors">3</div>
+            <div class="stat-desc">⚡ Dukcapil, Wisata, Lapor</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Active Conversation States</div>
+            <div class="stat-value" id="stat-active-sessions">0</div>
+            <div class="stat-desc">💬 Real-time memory track</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Tingkat Akurasi & Kepuasan</div>
+            <div class="stat-value" id="stat-satisfaction">98.4%</div>
+            <div class="stat-desc">✨ Semantic Routing optimal</div>
+          </div>
+        </div>
+
+        <!-- Architecture Concept Banner (From NYAI Tenant Guide) -->
+        <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px;">
+          <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 8px;">🧠 Konsep Sistem Routing: S-Bot Super Agent vs Specialized Agent</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+            Sistem S-Bot menggunakan <strong>Semantic Routing</strong> untuk memahami maksud (intent) warga, bukan sekadar kata kunci statis.
+            Jika warga bermaksud mengurus dokumen kependudukan atau reservasi wisata, <strong>AI Router 🔀</strong> secara otomatis mengalihkan alur percakapan ke <strong>Specialized Agent 🎯</strong> yang mengeksekusi step workflow.
+            Pertanyaan umum non-workflow akan ditangani oleh <strong>S-Bot Super Agent 🧠</strong> berbasis RAGFlow / Knowledge Base lokal.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <div style="font-size: 20px; margin-bottom: 6px;">🧠 Super Agent</div>
+              <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">Pengetahuan Umum & RAG</div>
+              <p style="font-size: 12px; color: #64748b;">Menjawab regulasi, visi misi, dan informasi umum dari dokumen resmi Diskominfo.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <div style="font-size: 20px; margin-bottom: 6px;">🔀 AI Router</div>
+              <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">Semantic Intent Classifier</div>
+              <p style="font-size: 12px; color: #64748b;">Mendeteksi intensi warga dengan confidence score untuk mengarahkan ke alur yang tepat.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+              <div style="font-size: 20px; margin-bottom: 6px;">🎯 Specialized Agent</div>
+              <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">Step Workflow Executor</div>
+              <p style="font-size: 12px; color: #64748b;">Mengumpulkan data, memvalidasi nomor WA/NIK, mengeksekusi API, dan menerbitkan tiket.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Logs on Dashboard -->
+        <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px;">
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px;">⚡ Aktivitas Sistem Terkini</h4>
+          <div id="dashboard-recent-logs" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 2: SPECIALIZED AGENTS -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-agents">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800;">Daftar Specialized Agents</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Kelola agen kustom yang menangani tugas dan alur kerja spesifik</p>
+          </div>
+          <button class="btn-primary" onclick="openNewAgentModal()">+ New Agent</button>
+        </div>
+        <div class="agents-grid" id="agents-list-container">
+          <!-- Dynamically populated via app.js -->
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 3: TEST CONSOLE (WITH DUAL-PANE REAL-TIME DEBUG PANEL) -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-test-console">
+        <div class="console-split">
+          <!-- Left: Chat Interface -->
+          <div class="console-chat-panel">
+            <div class="panel-header">
+              <h4>💬 Interactive Agent Simulator</h4>
+              <div style="display: flex; gap: 8px;">
+                <select id="console-target-agent" class="form-control" style="width: auto; padding: 4px 10px; font-size: 12px;">
+                  <option value="">🔀 Auto Route (Super Agent)</option>
+                  <!-- Populated by JS -->
+                </select>
+                <button class="btn-secondary" id="console-reset-btn" style="padding: 4px 10px; font-size: 12px;">
+                  🔄 Reset Session
+                </button>
+              </div>
+            </div>
+
+            <!-- Messages Stream -->
+            <div class="nyai-messages" id="console-messages" style="flex: 1; padding: 20px;">
+              <div class="nyai-msg-group bot">
+                <div class="nyai-bubble bot">
+                  Halo! Ini adalah <strong>Test Console S-Bot</strong>. Anda dapat mencoba mengetes routing semantik seperti:
+                  <div style="margin-top: 8px; font-size: 12px; color: #475569;">
+                    • <em>"Mau bikin KTP pemula dong"</em> ➔ Dukcapil Agent<br>
+                    • <em>"Berapa harga sewa Jeep Merapi Lava Tour?"</em> ➔ Wisata Agent<br>
+                    • <em>"Lapor wifi padukuhan kami mati"</em> ➔ Pengaduan Agent<br>
+                    • <em>"Apa visi misi Kabupaten Sleman?"</em> ➔ Super Agent (RAG)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="nyai-footer">
+              <form class="nyai-input-form" id="console-chat-form" onsubmit="return false;">
+                <input type="text" class="nyai-input" id="console-chat-input" placeholder="Ketik pesan untuk menguji alur agent..." autocomplete="off">
+                <button type="submit" class="nyai-send-btn" id="console-chat-send">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right: Live Debug Panel (Matching NYAI Tenant Guide) -->
+          <div class="console-debug-panel">
+            <div class="panel-header">
+              <h4>🔍 Real-Time Debug Panel</h4>
+              <span style="font-size: 11px; background: #ecfdf5; color: #047857; padding: 3px 8px; border-radius: 12px; font-weight: 700;">Live Inspector</span>
+            </div>
+
+            <div style="flex: 1; overflow-y: auto;">
+              <!-- 1. Routing Status -->
+              <div class="debug-section">
+                <div class="debug-label">🔀 AI Router Decision</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13.5px; font-weight: 700;" id="dbg-agent-name">Super Agent 🧠</span>
+                  <span style="font-size: 12px; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 10px; font-weight: 700;" id="dbg-confidence">Confidence: 0.95</span>
+                </div>
+                <div style="font-size: 12px; color: #64748b;" id="dbg-route-type">Type: General Knowledge Fallback</div>
+              </div>
+
+              <!-- 2. Current Step -->
+              <div class="debug-section">
+                <div class="debug-label">📍 Current Step Execution</div>
+                <div class="debug-value-box" id="dbg-current-step">Step: IDLE (Menunggu Input)</div>
+              </div>
+
+              <!-- 3. Collected Variables -->
+              <div class="debug-section">
+                <div class="debug-label">📥 Collected Variables ({variables})</div>
+                <div class="debug-variables-tree" id="dbg-variables-view">
+                  {}
+                </div>
+              </div>
+
+              <!-- 4. Step History -->
+              <div class="debug-section">
+                <div class="debug-label">📜 Step Flow History</div>
+                <div id="dbg-step-history" style="font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
+                  <div style="color: #94a3b8; font-style: italic;">Belum ada riwayat step yang dieksekusi.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 4: API CONNECTORS -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-connectors">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800;">API Connectors</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Integrasikan AI Agent ke sistem eksternal, webhook tiket, atau database antrean</p>
+          </div>
+          <button class="btn-primary" onclick="openNewConnectorModal()">+ New Connector</button>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Connector Name</th>
+              <th>Endpoint URL</th>
+              <th>Method</th>
+              <th>Auth Type</th>
+              <th>Parameter Mapping</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="connectors-table-body">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 5: CONVERSATION STATES / LIVE INBOX -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-sessions">
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 16px; font-weight: 800;">Active Conversation States</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">Pantau percakapan yang sedang berlangsung dan lakukan intervensi/takeover operator</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 320px 1fr; gap: 20px; height: calc(100vh - 200px);">
+          <!-- Sessions List -->
+          <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-md); overflow-y: auto;" id="sessions-list">
+            <!-- Populated via JS -->
+          </div>
+
+          <!-- Session Detail & Takeover Box -->
+          <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; flex-direction: column;" id="session-detail-view">
+            <div class="panel-header">
+              <h4 id="inbox-session-title">Pilih salah satu sesi di sebelah kiri</h4>
+              <span id="inbox-session-status" style="font-size: 11px;"></span>
+            </div>
+            <div class="nyai-messages" id="inbox-messages" style="flex: 1; padding: 20px;">
+              <div style="text-align: center; color: #94a3b8; padding-top: 40px;">
+                Belum ada percakapan yang dipilih.
+              </div>
+            </div>
+            <div class="nyai-footer" id="inbox-takeover-box" style="display: none;">
+              <form class="nyai-input-form" onsubmit="handleOperatorTakeover(event)">
+                <input type="text" class="nyai-input" id="inbox-takeover-input" placeholder="Ketik pesan untuk mengambil alih chat (Human Escalation)...">
+                <button type="submit" class="nyai-send-btn" style="background: #2563eb;">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 6: ACTIVITY LOGS -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-logs">
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 16px; font-weight: 800;">Activity Logs</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">Audit log lengkap proses pengambilan keputusan router semantik dan eksekusi step workflow</p>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 170px;">Timestamp</th>
+              <th style="width: 100px;">Level</th>
+              <th style="width: 120px;">Category</th>
+              <th>Pesan Aktivitas</th>
+            </tr>
+          </thead>
+          <tbody id="activity-logs-body">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 7: RAGFLOW & KNOWLEDGE BASE CONFIG -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-ragflow">
+        <div style="max-width: 800px;">
+          <div style="margin-bottom: 20px;">
+            <h4 style="font-size: 16px; font-weight: 800;">Konfigurasi Engine RAGFlow & Super Agent</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Pengaturan koneksi local cluster RAGFlow (Infinity / Elasticsearch + Ollama Llama 3.2)</p>
+          </div>
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+              <div>
+                <h5 style="font-size: 15px; font-weight: 700;">Status Engine RAGFlow</h5>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Sesuai rekomendasi Bab 4 Laporan Magang (Multi-Tenant Offline)</p>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+                Cluster Ready (Air-Gapped)
+              </span>
+            </div>
+
+            <form id="ragflow-config-form" onsubmit="saveRagflowConfig(event)">
+              <div class="form-group">
+                <label>RAGFlow HTTP API URL</label>
+                <input type="text" class="form-control" id="rf-url" value="http://localhost:9380">
+                <div class="hint">Port default API server RAGFlow pada docker-compose: 9380</div>
+              </div>
+
+              <div class="form-group">
+                <label>RAGFlow API Key</label>
+                <input type="text" class="form-control" id="rf-key" value="ragflow-sleman-local-key">
+              </div>
+
+              <div class="form-group">
+                <label>Dataset Knowledge Base ID</label>
+                <input type="text" class="form-control" id="rf-dataset" value="sleman-rag-dataset-01">
+                <div class="hint">Dataset yang menampung dokumen aturan Dukcapil, SOP Kominfo, dan Pariwisata Sleman.</div>
+              </div>
+
+              <div class="form-group">
+                <label>Similarity Threshold (Hallucination Prevention)</label>
+                <input type="range" min="0.5" max="0.95" step="0.05" id="rf-threshold" value="0.7" style="width: 100%;" oninput="document.getElementById('threshold-val').textContent = this.value">
+                <div style="font-size: 12px; font-weight: 700; color: #059669; margin-top: 4px;">Threshold: <span id="threshold-val">0.70</span></div>
+              </div>
+
+              <button type="submit" class="btn-primary">💾 Simpan Konfigurasi RAGFlow</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- TAB 8: EMBED WIDGET GENERATOR (MATCHING S-BOT GUIDE) -->
+      <!-- ========================================================================= -->
+      <section class="tab-content" id="tab-embed">
+        <div style="max-width: 850px;">
+          <div style="margin-bottom: 24px;">
+            <h4 style="font-size: 16px; font-weight: 800;">Embed Widget dengan Agent</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Sematkan widget chat S-Bot ke dalam website dinas Pemkab Sleman atau portal publik</p>
+          </div>
+
+          <!-- Mode 1: Standard Popup Widget -->
+          <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px;">
+            <h5 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">1. Widget Popup (Embed Standard)</h5>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+              Tambahkan tag script berikut tepat sebelum tag penutup <code>&lt;/body&gt;</code> di website Anda.
+            </p>
+
+            <div class="form-group">
+              <label>Target Agent (Opsional)</label>
+              <select id="embed-agent-select" class="form-control" onchange="updateEmbedCodeSnippets()">
+                <option value="">Semua Layanan (Super Agent & Auto Route)</option>
+                <option value="dukcapil-layanan">Dukcapil Layanan Kependudukan (dukcapil-layanan)</option>
+                <option value="wisata-sleman">Pariwisata & Destinasi Sleman (wisata-sleman)</option>
+                <option value="pengaduan-layanan">Layanan Pengaduan & Aspirasi (pengaduan-layanan)</option>
+              </select>
+              <div class="hint">Jika memilih agent spesifik, widget akan langsung memulai alur agent tersebut tanpa melalui routing umum.</div>
+            </div>
+
+            <div style="position: relative; margin-top: 14px;">
+              <textarea id="snippet-popup" class="form-control" rows="3" readonly style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #0f172a; color: #38bdf8;"></textarea>
+              <button class="btn-primary" style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; font-size: 12px;" onclick="copySnippet('snippet-popup')">
+                📋 Salin Kode
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode 2: Fullscreen Iframe -->
+          <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px;">
+            <h5 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;">2. Fullscreen Mode (Iframe / Halaman Penuh)</h5>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+              Untuk tampilan chat satu layar penuh atau disematkan di dalam elemen <code>&lt;iframe&gt;</code>:
+            </p>
+
+            <div style="position: relative;">
+              <textarea id="snippet-iframe" class="form-control" rows="3" readonly style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #0f172a; color: #38bdf8;"></textarea>
+              <button class="btn-primary" style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; font-size: 12px;" onclick="copySnippet('snippet-iframe')">
+                📋 Salin Kode
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CREATE / EDIT SPECIALIZED AGENT -->
+  <!-- ========================================================================= -->
+  <div class="modal-overlay" id="modal-agent">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-agent-title">Buat Specialized Agent Baru</h3>
+        <button class="btn-secondary" style="padding: 4px 8px;" onclick="closeAgentModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-agent">
+          <input type="hidden" id="agent-form-id">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label>Nama Agent</label>
+              <input type="text" class="form-control" id="agent-form-name" placeholder="Contoh: Layanan Bansos Sleman" required>
+            </div>
+            <div class="form-group">
+              <label>Agent Slug (Pengenal Unik)</label>
+              <input type="text" class="form-control" id="agent-form-slug" placeholder="Contoh: bansos-sleman" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Dinas / Instansi</label>
+            <input type="text" class="form-control" id="agent-form-dept" placeholder="Contoh: Dinas Sosial Kabupaten Sleman" required>
+          </div>
+
+          <div class="form-group">
+            <label>Deskripsi Singkat</label>
+            <input type="text" class="form-control" id="agent-form-desc" placeholder="Jelaskan peran agent ini">
+          </div>
+
+          <div class="form-group">
+            <label>Semantic Trigger Description</label>
+            <textarea class="form-control" id="agent-form-trigger" rows="2" placeholder="Ketika pengguna ingin menanyakan atau mengurus bantuan sosial..."></textarea>
+            <div class="hint">Kalimat deskriptif yang menjelaskan KAPAN agent ini harus diaktifkan oleh AI Router.</div>
+          </div>
+
+          <div class="form-group">
+            <label>Fallback Keywords (Pisahkan dengan koma)</label>
+            <input type="text" class="form-control" id="agent-form-keywords" placeholder="bansos, bantuan, pkh, dtks, sembako">
+          </div>
+
+          <div class="form-group">
+            <label>Pilih Persona Agent</label>
+            <div class="persona-grid">
+              <div class="persona-card selected" data-persona="professional" onclick="selectPersona('professional')">
+                <div class="persona-icon">👔</div>
+                <div class="persona-title">Professional</div>
+              </div>
+              <div class="persona-card" data-persona="friendly" onclick="selectPersona('friendly')">
+                <div class="persona-icon">😊</div>
+                <div class="persona-title">Friendly</div>
+              </div>
+              <div class="persona-card" data-persona="witty" onclick="selectPersona('witty')">
+                <div class="persona-icon">🎭</div>
+                <div class="persona-title">Witty</div>
+              </div>
+              <div class="persona-card" data-persona="empathetic" onclick="selectPersona('empathetic')">
+                <div class="persona-icon">💚</div>
+                <div class="persona-title">Empathetic</div>
+              </div>
+            </div>
+            <input type="hidden" id="agent-form-persona" value="professional">
+          </div>
+
+          <!-- Step Builder Section -->
+          <div style="border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <label style="margin: 0;">Alur Percakapan (Conversation Steps)</label>
+                <div class="hint">Urutan langkah: Prompt, Collect Input, Condition, Workflow, Response</div>
+              </div>
+              <button type="button" class="btn-secondary" style="font-size: 12px; padding: 4px 10px;" onclick="addStepItem()">
+                + Tambah Step
+              </button>
+            </div>
+            <div class="steps-list" id="modal-steps-list">
+              <!-- Steps items added here -->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeAgentModal()">Batal</button>
+        <button class="btn-primary" onclick="saveAgentFromModal()">💾 Simpan Agent</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

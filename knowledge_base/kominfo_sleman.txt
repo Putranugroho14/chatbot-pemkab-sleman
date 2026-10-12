@@ -1,0 +1,223 @@
+==========================================================
+PENGETAHUAN DINAS KOMUNIKASI DAN INFORMATIKA (KOMINFO)
+KABUPATEN SLEMAN - DAERAH ISTIMEWA YOGYAKARTA
+Sumber: https://kominfo.slemankab.go.id/
+Dibuat untuk: Knowledge Base AI Asisten Internal
+==========================================================
+
+--- INFORMASI UMUM ---
+
+Nama Dinas  : Dinas Komunikasi dan Informatika Kabupaten Sleman
+Singkatan   : Diskominfo / Kominfo Sleman
+Alamat      : Jl. Parasamya (Komplek Kantor Bupati Sleman) Beran, Tridadi, Sleman, Yogyakarta 55511
+Telepon     : (0274) 868405
+Fax         : (0274) 868945
+Email       : kominfo@slemankab.go.id
+Website     : https://kominfo.slemankab.go.id/
+
+Media Sosial:
+- Instagram : @kominfo_sleman
+- Twitter/X : @kominfo_sleman
+- Facebook  : diskominfo.sleman
+
+--- SEJARAH ---
+
+Dinas Kominfo dibentuk berdasarkan Peraturan Daerah Kabupaten Sleman Nomor 11 Tahun 2016 tentang Pembentukan dan Susunan Perangkat Daerah Kabupaten Sleman.
+
+Kedudukan, susunan organisasi, tugas dan fungsi serta tata kerja perangkat daerah diatur dengan Peraturan Bupati Sleman No. 6 Tahun 2024.
+
+Dinas Kominfo merupakan penggabungan dari:
+1. Urusan komunikasi dan informatika (sebelumnya di Dinas Perhubungan, Komunikasi dan Informatika)
+2. Urusan data statistik (sebelumnya di Badan Perencanaan Pembangunan Daerah)
+3. Sebagian urusan kehumasan (sebelumnya di Sekretariat Daerah)
+
+--- VISI MISI ---
+
+Visi Bupati dan Wakil Bupati Sleman Periode 2025-2030:
+"Membangun Masyarakat Kabupaten Sleman yang Maju, Adil Makmur, Lestari dan Berkeadaban"
+
+--- TUGAS POKOK DAN FUNGSI (TUPOKSI) ---
+
+Dasar Hukum: Peraturan Bupati Sleman Nomor 6 Tahun 2024 Tentang Kedudukan, Susunan Organisasi, Tugas dan Fungsi, Serta Tata Kerja Dinas.
+
+TUGAS UTAMA:
+Dinas Komunikasi dan Informatika merupakan unsur pelaksana urusan pemerintahan bidang:
+- Komunikasi dan Informatika
+- Persandian
+- Statistik
+Dipimpin oleh Kepala Dinas yang bertanggung jawab kepada Bupati melalui Sekretaris Daerah.
+
+FUNGSI UTAMA:
+1. Penyusunan rencana kerja Dinas Komunikasi dan Informatika
+2. Perumusan kebijakan teknis urusan komunikasi, informatika, persandian, dan statistik
+3. Pelaksanaan, pelayanan, pembinaan, dan pengendalian urusan tersebut
+4. Evaluasi dan pelaporan pelaksanaan urusan
+5. Pelaksanaan kesekretariatan dinas
+6. Pelaksanaan tugas lain yang diberikan oleh Bupati
+
+--- STRUKTUR ORGANISASI ---
+
+1. SEKRETARIAT
+Tugas: Melaksanakan urusan umum, kepegawaian, keuangan, perencanaan dan evaluasi.
+Fungsi:
+- Penyusunan rencana kerja
+- Perumusan kebijakan teknis kesekretariatan
+- Pelaksanaan urusan umum, kepegawaian, keuangan
+- Pengoordinasian pelaksanaan tugas satuan organisasi
+- Evaluasi dan penyusunan laporan
+
+   a. Subbagian Umum dan Kepegawaian
+   Tugas: Menyiapkan bahan pelaksanaan urusan umum dan kepegawaian.
+   Fungsi meliputi: pengelolaan persuratan, kearsipan, perlengkapan, dokumentasi, analisis kebutuhan pegawai, pelayanan administrasi pegawai.
+
+   b. Subbagian Keuangan, Perencanaan dan Evaluasi
+   Tugas: Menyiapkan bahan pelaksanaan urusan keuangan, perencanaan dan evaluasi.
+   Fungsi meliputi: penatausahaan keuangan, pengembangan inovasi dinas, evaluasi kinerja.
+
+2. BIDANG INFRASTRUKTUR TEKNOLOGI INFORMASI DAN PENGENDALIAN TELEKOMUNIKASI
+Tugas: Membina dan melaksanakan pengelolaan infrastruktur TI, pusat data, dan pengendalian telekomunikasi.
+Fungsi:
+- Pembangunan, pengelolaan dan pengembangan infrastruktur jaringan TI
+- Pengelolaan pusat data
+- Pengendalian telekomunikasi
+
+   a. Kelompok Substansi Infrastruktur Teknologi Informasi
+   Meliputi: pengelolaan infrastruktur TI, jaringan nirkabel/hotspot, CCTV area publik, telepon VoIP.
+
+   b. Kelompok Substansi Pengelolaan Pusat Data
+   Meliputi: perencanaan dan pemeliharaan ruang pusat data, keamanan server, pelayanan recovery data.
+
+   c. Kelompok Substansi Pengendalian Telekomunikasi
+   Meliputi: pembinaan dan pengawasan infrastruktur telekomunikasi, radio komunitas, warnet, game online, rekomendasi perizinan infrastruktur telekomunikasi.
+
+3. BIDANG LAYANAN E-GOVERNMENT DAN PERSANDIAN
+Tugas: Membina dan melaksanakan layanan e-Government dan persandian.
+Fungsi:
+- Pelaksanaan dan pembinaan layanan e-Government
+- Pelaksanaan dan pembinaan layanan persandian
+
+   a. Kelompok Substansi Aplikasi dan Integrasi Sistem Informasi
+   Meliputi: pengembangan dan pengelolaan aplikasi kepemerintahan, layanan publik, integrasi sistem informasi, interoperabilitas data.
+
+   b. Kelompok Substansi Layanan Informatika
+   Meliputi: pemberdayaan masyarakat informatika, pengelolaan portal website, domain pemerintah, tata kelola e-Government, ekosistem Sleman Smart Regency, perangkat lunak legal.
+
+   c. Kelompok Substansi Persandian
+   Meliputi: tata kelola persandian, operasional pengamanan persandian, pengawasan dan evaluasi persandian.
+
+4. BIDANG INFORMASI DAN KOMUNIKASI PUBLIK
+Tugas: Membina dan melaksanakan pengelolaan informasi dan komunikasi publik.
+Fungsi:
+- Pelaksanaan dan pembinaan pengelolaan informasi publik
+- Pelaksanaan dan pembinaan komunikasi publik
+- Pelayanan pengaduan masyarakat
+- Pelaksanaan dan pembinaan data statistik
+
+   a. Kelompok Substansi Pengelolaan Informasi Publik
+   Meliputi: pelayanan informasi publik, pemberdayaan masyarakat informasi, jaringan informasi publik, siaran radio komunitas, hubungan media, pengelolaan media center.
+
+   b. Kelompok Substansi Komunikasi Publik dan Pelayanan Pengaduan
+   Meliputi: diseminasi informasi pemerintah, pengelolaan media informasi, monitoring opini dan aspirasi publik, pengelolaan konten media komunikasi, call center, sistem pengaduan masyarakat terintegrasi, manajemen komunikasi krisis.
+
+   c. Seksi Data Statistik
+   Meliputi: statistik sektoral, kerja sama pengembangan statistik, koordinasi sensus dan survai.
+
+--- LAYANAN DAN PROGRAM UNGGULAN ---
+
+1. ePPID (Pejabat Pengelola Informasi dan Dokumentasi Elektronik)
+   - Pemerintah Kabupaten Sleman menyediakan berbagai informasi sebagai bentuk dukungan terhadap transparansi data
+   - Masyarakat dapat mengajukan permohonan informasi publik
+   - Portal: https://ppid.slemankab.go.id
+
+2. Sleman TV
+   - Kanal YouTube resmi milik Pemerintah Kabupaten Sleman
+   - Menyajikan informasi secara audio visual tentang program dan kegiatan Pemkab Sleman
+   - Bentuk keterbukaan informasi publik
+
+3. SLEMAN DIGITAL
+   - Program digitalisasi layanan Kabupaten Sleman
+
+4. SINTA JAWARA
+   - Program unggulan digital Sleman
+
+5. LAPOR SLEMAN
+   - Sistem pengaduan masyarakat
+
+6. MEDIA CENTER
+   - Pusat media informasi Kominfo Sleman
+
+7. SATU DATA
+   - Pengelolaan data terintegrasi
+
+--- INFORMASI PUBLIK ---
+
+Kategori Informasi Publik yang Tersedia:
+1. Wajib Diumumkan Berkala
+2. Wajib Diumumkan Setiap Saat
+3. Wajib Diumumkan Serta Merta
+4. Laporan Permohonan Informasi Publik
+5. Formulir Permohonan Informasi
+6. Alur PPID
+
+--- BERITA DAN KEGIATAN TERKINI ---
+
+- Pemkab Sleman Intensifkan Penanganan Kebakaran Misterius di Seyegan
+- Sambut Libur Sekolah, Sleman Siapkan Agenda Pendidikan, Wisata, dan Sejarah Kebangsaan
+- Pemkab Sleman Ajak Masyarakat Wujudkan Kurban Sehat, Aman, dan Ramah Lingkungan
+- Pemkab Sleman Komitmen Wujudkan Program Jalane Alus
+- Sleman Perkuat Transformasi Layanan Publik Digital yang Cepat dan Terintegrasi
+- Momentum Hari Jadi ke-110, Sleman Perkuat Kepedulian Sosial Lewat Bakti Sosial
+- Sleman Jadi Salah Satu Lokasi Pilot Project Nasional Digitalisasi Perlinsos
+
+--- INFOGRAFIS DAN BULETIN ---
+
+- Buletin Produk Domestik Regional Bruto Kab. Sleman Tahun 2021-2025
+- Buletin Perkembangan Inflasi di DIY Triwulan II Tahun 2026
+- Buletin Indeks Perkembangan Harga Mei 2026
+- Buletin Indeks Perkembangan Harga April 2026
+- Buletin Indeks Perkembangan Harga Maret 2026
+- Buletin Perkembangan Inflasi di DIY Triwulan I Tahun 2026
+
+--- TAUTAN PENTING ---
+
+- Website Resmi   : https://kominfo.slemankab.go.id/
+- Portal PPID     : https://ppid.slemankab.go.id
+- Whistleblower   : https://inspektorat.slemankab.go.id/whistleblowersystem/
+- Kebijakan Privasi: https://kominfo.slemankab.go.id/kebijakan-privasi-2/
+
+==========================================================
+PERTANYAAN YANG SERING DIAJUKAN (FAQ)
+==========================================================
+
+T: Apa itu Dinas Kominfo Sleman?
+J: Dinas Komunikasi dan Informatika (Kominfo) Kabupaten Sleman adalah instansi pemerintah yang bertugas melaksanakan urusan pemerintahan di bidang komunikasi, informatika, persandian, dan statistik di wilayah Kabupaten Sleman, DIY.
+
+T: Di mana alamat Dinas Kominfo Sleman?
+J: Jl. Parasamya (Komplek Kantor Bupati Sleman) Beran, Tridadi, Sleman, Yogyakarta 55511. Telepon: (0274) 868405.
+
+T: Apa saja layanan Dinas Kominfo Sleman?
+J: Layanan meliputi: pengelolaan infrastruktur TI, pusat data, pengendalian telekomunikasi, layanan e-Government, persandian, informasi publik (PPID), komunikasi publik, pengaduan masyarakat, dan data statistik.
+
+T: Bagaimana cara mengajukan permohonan informasi publik?
+J: Masyarakat dapat mengajukan permohonan informasi publik melalui portal ePPID di https://ppid.slemankab.go.id atau mengisi formulir yang tersedia di website Kominfo Sleman.
+
+T: Apa itu program Sleman Digital?
+J: Sleman Digital adalah program digitalisasi layanan publik Kabupaten Sleman yang bertujuan mempercepat transformasi digital pemerintahan dan meningkatkan kualitas pelayanan kepada masyarakat.
+
+T: Bagaimana cara melaporkan pengaduan kepada Kominfo Sleman?
+J: Pengaduan dapat disampaikan melalui sistem LAPOR SLEMAN yang dikelola oleh Kominfo Sleman, atau dapat menghubungi langsung melalui telepon (0274) 868405.
+
+==========================================================
+SAPAAN DAN OBROLAN UMUM (PANDUAN UNTUK AI)
+==========================================================
+
+T: halo, hai, helo, ping, p, selamat pagi, selamat siang, selamat sore, selamat malam, assalamualaikum.
+J: Halo! Selamat datang. Saya adalah Asisten Virtual cerdas dari Dinas Kominfo Sleman. Saya siap mengobrol dan membantu Anda menjawab berbagai pertanyaan seputar layanan, tugas, dan informasi publik di Dinas Kominfo Sleman. Ada yang bisa saya bantu hari ini?
+
+T: terima kasih, makasih, thanks, matur nuwun.
+J: Sama-sama! Senang bisa membantu Anda. Jika ada pertanyaan lain seputar Kominfo Sleman, jangan ragu untuk bertanya lagi ya. Semoga hari Anda menyenangkan!
+
+T: kamu siapa, siapa namamu, pembuatmu.
+J: Saya adalah Asisten Virtual (AI) cerdas yang dikembangkan untuk membantu melayani masyarakat dalam mencari informasi terkait Dinas Kominfo Sleman.
+
+==========================================================

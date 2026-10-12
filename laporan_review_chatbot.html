@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan Review Platform Chatbot AI – Magang Diskominfo Sleman 2026</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
+      background: #eee;
+      color: #000;
+    }
+
+    .page {
+      max-width: 210mm;
+      margin: 20px auto;
+      background: #fff;
+      padding: 25mm 20mm 20mm 25mm;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+      page-break-after: always;
+    }
+
+    .cover-title {
+      font-size: 18pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .cover-sub {
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .cover-info {
+      text-align: center;
+      font-size: 12pt;
+      margin-bottom: 4px;
+    }
+
+    hr.div {
+      border: none;
+      border-top: 2px solid #000;
+      margin: 14px 0;
+    }
+
+    .review-title {
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 12px;
+      border-bottom: 3px double #000;
+      padding-bottom: 6px;
+    }
+
+    table.rt {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11pt;
+    }
+
+    table.rt td {
+      border: 1px solid #000;
+      padding: 6px 9px;
+      vertical-align: top;
+    }
+
+    table.rt td.lbl {
+      font-weight: bold;
+      width: 28%;
+      background: #f5f5f5;
+    }
+
+    table.rt td.col {
+      width: 2%;
+      text-align: center;
+    }
+
+    .sh td {
+      background: #1a1a6c !important;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .criteria {
+      font-size: 10pt;
+    }
+
+    .criteria td {
+      border: 1px solid #000;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .criteria th {
+      border: 1px solid #000;
+      padding: 6px;
+      background: #1a1a6c;
+      color: #fff;
+    }
+
+    .criteria td.lft {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .note {
+      border: 1px solid #1a1a6c;
+      padding: 14px;
+      background: #f0f4ff;
+      margin-top: 10px;
+      font-size: 11pt;
+      line-height: 1.7;
+    }
+
+    .ft {
+      font-size: 9pt;
+      text-align: center;
+      color: #555;
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- COVER -->
+  <div class="page">
+    <div style="text-align:center;font-size:36pt;margin-bottom:16px;">⚙</div>
+    <hr class="div">
+    <p class="cover-title">LAPORAN REVIEW PLATFORM AI CHATBOT</p>
+    <p class="cover-sub">Kajian Komparatif: Flowise, Dify, Open WebUI, RAGFlow &amp; Nyai Support Board</p>
+    <hr class="div">
+    <br>
+    <p class="cover-info"><strong>Tujuan Review:</strong></p>
+    <p class="cover-info" style="font-style:italic;max-width:400px;margin:6px auto 16px;">Menemukan platform chatbot AI
+      yang dapat di-<em>self host</em>, mendukung <em>agentic workflow</em>, memiliki kemampuan <em>multi-agent</em>
+      dengan isolasi knowledge base per agen, serta dapat di-<em>embed</em> ke website instansi pemerintah.</p>
+    <p class="cover-info"><strong>Disusun untuk Memenuhi Keperluan Dokumentasi Magang</strong></p>
+    <p class="cover-info">Dinas Komunikasi dan Informatika Kabupaten Sleman</p>
+    <p class="cover-info">Daerah Istimewa Yogyakarta</p>
+    <br><br>
+    <p class="cover-info"><strong>Reviewer:</strong> ___________________________</p>
+    <p class="cover-info"><strong>Tanggal:</strong> 25 Juli 2026</p>
+    <p class="cover-info"><strong>Program Studi:</strong> ___________________________</p>
+    <p class="cover-info"><strong>Universitas:</strong> ___________________________</p>
+    <br>
+    <hr class="div">
+    <br>
+    <div class="note">
+      <strong>📌 Kriteria Evaluasi Utama:</strong><br>
+      Setiap platform dievaluasi berdasarkan 5 kriteria wajib berikut:<br>
+      1. <strong>Self-hosted</strong> — Dapat diinstal dan dijalankan di server sendiri (on-premise / lokal) tanpa
+      ketergantungan cloud pihak ketiga.<br>
+      2. <strong>Agentic Workflow</strong> — Mendukung pembuatan AI Agent yang dapat merencanakan, menggunakan tools,
+      dan menjalankan alur kerja multi-langkah secara otomatis.<br>
+      3. <strong>Multi-Agent &amp; Knowledge Isolation</strong> — Dapat membuat banyak agen terpisah di mana setiap agen
+      hanya memiliki akses ke knowledge base-nya sendiri (data silo).<br>
+      4. <strong>Embeddable</strong> — Menyediakan mekanisme untuk menyematkan widget chat ke website atau platform lain
+      (iframe, script, API).<br>
+      5. <strong>Production Ready</strong> — Stabil, memiliki manajemen pengguna, dan dapat digunakan dalam lingkungan
+      produksi pemerintahan.
+    </div>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- REVIEW 1: FLOWISE -->
+  <div class="page">
+    <div class="review-title">REVIEW PLATFORM #1 — FLOWISE</div>
+    <table class="rt">
+      <tr>
+        <td class="lbl">Judul</td>
+        <td class="col">:</td>
+        <td>Flowise – Drag &amp; Drop UI to Build Your Customized LLM Flow (Agentic Pipeline Builder)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Jurnal/Platform</td>
+        <td class="col">:</td>
+        <td>FlowiseAI – docs.flowiseai.com | GitHub: FlowiseAI/Flowise</td>
+      </tr>
+      <tr>
+        <td class="lbl">Versi &amp; Rilis</td>
+        <td class="col">:</td>
+        <td>v2.x (2024) – Open Source, MIT License</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tahun</td>
+        <td class="col">:</td>
+        <td>2023–2024</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pengembang</td>
+        <td class="col">:</td>
+        <td>Henry Heng &amp; Komunitas Open Source FlowiseAI</td>
+      </tr>
+      <tr>
+        <td class="lbl">Reviewer</td>
+        <td class="col">:</td>
+        <td>___________________________</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal Review</td>
+        <td class="col">:</td>
+        <td>25 Juli 2026</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="sh">HASIL REVIEW</td>
+      </tr>
+      <tr>
+        <td class="lbl">Rumusan Masalah</td>
+        <td class="col">:</td>
+        <td>Apakah Flowise mampu memenuhi kebutuhan platform <em>self-hosted agentic workflow</em> dengan kemampuan
+          <em>multi-agent</em> yang terisolasi per knowledge base dan dapat di-embed ke website instansi pemerintahan?
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Tujuan / Ide Pokok</td>
+        <td class="col">:</td>
+        <td>Flowise menyediakan antarmuka visual berbentuk <em>canvas drag-and-drop</em> untuk membangun pipeline LLM
+          dan AI Agent secara no-code. Platform ini menargetkan developer yang ingin membangun aplikasi AI kompleks
+          tanpa menulis kode dari awal, menjadikannya kandidat awal yang menjanjikan sebagai platform agentic.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Metode / Teknologi</td>
+        <td class="col">:</td>
+        <td>Node.js backend + React frontend. Mendukung LangChain Agent nodes (ReAct, OpenAI Function Agent), Tool nodes
+          (Calculator, Web Search, Custom API), dan Memory nodes. Setiap <em>Chatflow</em> dapat diekspos sebagai embed
+          widget via script tag atau iframe. Self-host via Docker dengan satu container ringan.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Evaluasi Kriteria Utama</td>
+        <td class="col">:</td>
+        <td>
+          ✅ <strong>Self-hosted:</strong> Ya — Docker single container, sangat ringan (~512MB RAM).<br>
+          ✅ <strong>Agentic Workflow:</strong> Ya — Mendukung ReAct Agent, Tool Calling Agent, Multi-step reasoning via
+          node graph.<br>
+          ⚠️ <strong>Multi-Agent &amp; Knowledge Isolation:</strong> Parsial — Setiap Chatflow terpisah dan memiliki
+          Vector Store sendiri, namun tidak ada sistem manajemen pengguna/tenant yang mencegah akses antar Chatflow
+          secara native. Isolasi bergantung pada URL API key yang berbeda.<br>
+          ✅ <strong>Embeddable:</strong> Ya — Tersedia embed script, iframe, dan React/Vue/Angular component. Sangat
+          mudah disematkan ke website mana pun.<br>
+          ⚠️ <strong>Production Ready:</strong> Parsial — Cocok untuk prototype dan deployment kecil, namun manajemen
+          pengguna multi-tenant belum enterprise-grade.
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Hasil Pengujian</td>
+        <td class="col">:</td>
+        <td>Flowise berhasil digunakan membangun prototipe chatbot RAG dengan Ollama (Llama 3.2) secara lokal. Pembuatan
+          Agent dengan tool "retrieval dari knowledge base" selesai dalam &lt;1 jam. Fitur embed berhasil menampilkan
+          widget chat di halaman HTML statis. Namun, saat dicoba membuat 2 agent terpisah (Kominfo &amp; Pariwisata),
+          tidak ada mekanisme bawaan yang mencegah pengguna mengakses Chatflow lain jika memiliki API key-nya.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kekuatan Platform</td>
+        <td class="col">:</td>
+        <td>1. Termudah digunakan — kurva belajar paling rendah dari semua platform.<br>2. Embed paling fleksibel — 1
+          baris script sudah cukup memasang chat widget.<br>3. Komunitas besar &amp; dokumentasi lengkap.<br>4.
+          Self-host ringan, cocok untuk server dengan resource terbatas.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kelemahan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Knowledge Isolation lemah</strong> — Tidak ada hard isolation antar agent/tenant secara native;
+          berbahaya untuk data sensitif pemerintahan.<br>2. Tidak ada sistem RBAC yang memadai untuk pengelolaan
+          multi-departemen.<br>3. Parsing dokumen pemerintahan kompleks (PDF bертable) masih terbatas.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kesimpulan</td>
+        <td class="col">:</td>
+        <td>Flowise adalah pilihan terbaik untuk <strong>prototyping cepat dan embedding</strong>. Namun, karena isolasi
+          knowledge base antar agent tidak bersifat hard isolation, platform ini tidak memenuhi standar keamanan data
+          untuk deployment multi-dinas di lingkungan pemerintahan. <strong>Tidak dipilih sebagai solusi final.</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Referensi</td>
+        <td class="col">:</td>
+        <td>FlowiseAI. (2024). <em>Flowise Documentation</em>. https://docs.flowiseai.com |
+          https://github.com/FlowiseAI/Flowise</td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- REVIEW 2: DIFY -->
+  <div class="page">
+    <div class="review-title">REVIEW PLATFORM #2 — DIFY</div>
+    <table class="rt">
+      <tr>
+        <td class="lbl">Judul</td>
+        <td class="col">:</td>
+        <td>Dify – Open Source LLM Application Development Platform with Agentic Workflow &amp; Multi-Tenant Knowledge
+          Base</td>
+      </tr>
+      <tr>
+        <td class="lbl">Jurnal/Platform</td>
+        <td class="col">:</td>
+        <td>Dify.AI – docs.dify.ai | GitHub: langgenius/dify</td>
+      </tr>
+      <tr>
+        <td class="lbl">Versi &amp; Rilis</td>
+        <td class="col">:</td>
+        <td>v0.6.x – v0.9.x (2024), Docker Compose Self-Hosted</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tahun</td>
+        <td class="col">:</td>
+        <td>2023–2024</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pengembang</td>
+        <td class="col">:</td>
+        <td>LangGenius Inc. (Luyu Zhang &amp; Tim)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Reviewer</td>
+        <td class="col">:</td>
+        <td>___________________________</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal Review</td>
+        <td class="col">:</td>
+        <td>25 Juli 2026</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="sh">HASIL REVIEW</td>
+      </tr>
+      <tr>
+        <td class="lbl">Rumusan Masalah</td>
+        <td class="col">:</td>
+        <td>Apakah Dify mampu memenuhi kebutuhan platform <em>self-hosted agentic workflow</em> dengan <em>multi-agent
+            knowledge isolation</em> yang ketat dan kemampuan <em>embed</em> ke website pemerintahan?</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tujuan / Ide Pokok</td>
+        <td class="col">:</td>
+        <td>Dify hadir sebagai platform LLM end-to-end yang mencakup pembuatan chatbot, RAG pipeline, AI Agent, dan
+          Workflow Orchestration visual dalam satu platform terintegrasi. Dify dirancang untuk production-ready dengan
+          sistem workspace dan manajemen pengguna bawaan.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Metode / Teknologi</td>
+        <td class="col">:</td>
+        <td>Docker Compose stack: Flask API + Celery Worker + Next.js Frontend + PostgreSQL + Redis + Weaviate/pgvector.
+          Agent berbasis Function Calling &amp; ReAct. Workflow editor visual untuk multi-step pipeline. Knowledge Base
+          dengan hybrid search (keyword + semantic). Embed via script tag, iframe, atau API endpoint.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Evaluasi Kriteria Utama</td>
+        <td class="col">:</td>
+        <td>
+          ✅ <strong>Self-hosted:</strong> Ya — Docker Compose, fully on-premise, mendukung Ollama lokal.<br>
+          ✅ <strong>Agentic Workflow:</strong> Ya — Workflow editor visual sangat powerful; mendukung Agent node,
+          If/Else branching, Iteration, Code execution, Tool integration.<br>
+          ❌ <strong>Multi-Agent &amp; Knowledge Isolation:</strong> Tidak — Meskipun Dify memiliki fitur multiple App
+          dan Workspace, pada pengujian nyata isolasi antar agent tidak berjalan sebagaimana diharapkan. Seorang
+          pengguna dapat dijadikan member di beberapa Workspace sekaligus dan mengakses semua App di dalamnya; tidak ada
+          mekanisme teknis yang mencegah hal ini secara paksa (hard isolation).<br>
+          ✅ <strong>Embeddable:</strong> Ya — Tersedia embed script, bubble button, dan fullscreen iframe. Dapat
+          dikustomisasi warna dan logo.<br>
+          ✅ <strong>Production Ready:</strong> Ya — Memiliki SSO, API key management, log percakapan, annotation, dan
+          monitoring.
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Hasil Pengujian</td>
+        <td class="col">:</td>
+        <td>Dify berhasil di-deploy dengan Docker. Knowledge Base dibuat dari file TXT Kominfo dan Pariwisata. Dua App
+          chatbot terpisah dibuat dengan Knowledge Base berbeda — saat chatbot Kominfo ditanya tentang Pariwisata, ia
+          tidak menemukan jawaban (isolasi berhasil secara fungsional). Embed widget berhasil muncul di halaman web.
+          Namun konsumsi RAM mencapai 6–8 GB yang menyebabkan konflik dengan layanan Docker lain.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kekuatan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Workflow visual terlengkap</strong> — Editor node-based dengan fitur conditional, iteration, dan
+          code block.<br>2. <strong>Knowledge isolation fungsional</strong> — Setiap App terisolasi ke Knowledge
+          Base-nya sendiri.<br>3. Embed paling kaya fitur — mendukung kustomisasi tampilan widget.<br>4. Monitoring
+          &amp; analytics percakapan bawaan.<br>5. Komunitas paling aktif &amp; update paling cepat.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kelemahan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Resource sangat besar</strong> — RAM 6–8 GB untuk Dify saja, belum Ollama (~4 GB). Total &gt;10
+          GB RAM dibutuhkan.<br>2. Isolasi antar workspace tidak sekeras RAGFlow (shared database infrastructure).<br>3.
+          Port default 80/443 sering konflik dengan layanan lain.<br>4. Kompleksitas setup Docker Compose dengan 8+
+          container.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kesimpulan</td>
+        <td class="col">:</td>
+        <td>Dify adalah platform yang paling memenuhi semua kriteria utama secara fungsional — self-host, agentic
+          workflow, multi-agent dengan knowledge isolation, dan embeddable. Namun kebutuhan resource yang sangat besar
+          menjadi kendala untuk server pemerintahan dengan resource terbatas. <strong>Dify menjadi kandidat kuat namun
+            tidak dipilih karena kendala resource.</strong></td>
+      </tr>
+      <tr>
+        <td class="lbl">Referensi</td>
+        <td class="col">:</td>
+        <td>LangGenius. (2024). <em>Dify Documentation</em>. https://docs.dify.ai | https://github.com/langgenius/dify
+        </td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- REVIEW 3: OPEN WEBUI -->
+  <div class="page">
+    <div class="review-title">REVIEW PLATFORM #3 — OPEN WEBUI</div>
+    <table class="rt">
+      <tr>
+        <td class="lbl">Judul</td>
+        <td class="col">:</td>
+        <td>Open WebUI – Extensible, Self-Hosted AI Interface with Multi-User Knowledge Base Management</td>
+      </tr>
+      <tr>
+        <td class="lbl">Jurnal/Platform</td>
+        <td class="col">:</td>
+        <td>Open WebUI – docs.openwebui.com | GitHub: open-webui/open-webui</td>
+      </tr>
+      <tr>
+        <td class="lbl">Versi &amp; Rilis</td>
+        <td class="col">:</td>
+        <td>v0.3.x – v0.5.x (2024), Docker Image: ghcr.io/open-webui/open-webui</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tahun</td>
+        <td class="col">:</td>
+        <td>2023–2024</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pengembang</td>
+        <td class="col">:</td>
+        <td>Tim Baek &amp; Komunitas Open Source</td>
+      </tr>
+      <tr>
+        <td class="lbl">Reviewer</td>
+        <td class="col">:</td>
+        <td>___________________________</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal Review</td>
+        <td class="col">:</td>
+        <td>25 Juli 2026</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="sh">HASIL REVIEW</td>
+      </tr>
+      <tr>
+        <td class="lbl">Rumusan Masalah</td>
+        <td class="col">:</td>
+        <td>Apakah Open WebUI mampu memenuhi kebutuhan platform <em>self-hosted</em> dengan kemampuan <em>multi-agent
+            knowledge isolation</em> per departemen, <em>agentic workflow</em>, dan fitur <em>embed</em> ke website
+          pemerintahan?</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tujuan / Ide Pokok</td>
+        <td class="col">:</td>
+        <td>Open WebUI bertujuan menyediakan antarmuka web lengkap menyerupai ChatGPT untuk model AI yang berjalan lokal
+          via Ollama. Fokus utamanya adalah user experience, manajemen multi-user, dan Knowledge Base per grup/user.
+          Dirancang sebagai "ChatGPT for your own server."</td>
+      </tr>
+      <tr>
+        <td class="lbl">Metode / Teknologi</td>
+        <td class="col">:</td>
+        <td>SvelteKit frontend + Python/FastAPI backend. Vector store: ChromaDB internal. Sistem RBAC: Admin, User,
+          Groups. Knowledge Base dapat dibuat per grup dan dikontrol aksesnya. Tools/Functions dapat ditambahkan via
+          plugin Python. Komunikasi ke Ollama via REST API lokal.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Evaluasi Kriteria Utama</td>
+        <td class="col">:</td>
+        <td>
+          ✅ <strong>Self-hosted:</strong> Ya — Docker single container sangat ringan (~500MB RAM). Setup paling
+          mudah.<br>
+          ⚠️ <strong>Agentic Workflow:</strong> Terbatas — Mendukung Tools (Function Calling) namun tidak ada workflow
+          editor visual seperti Dify. Agent bersifat conversational, bukan pipeline multi-step.<br>
+          ⚠️ <strong>Multi-Agent &amp; Knowledge Isolation:</strong> Parsial — Knowledge Base dapat diisolasi per grup,
+          namun isolasi tidak bersifat hard isolation; model LLM yang sama digunakan semua user dan berpotensi bocor
+          lintas konteks dalam skenario tertentu.<br>
+          ❌ <strong>Embeddable:</strong> Tidak — Open WebUI tidak menyediakan fitur embed widget / chat iframe untuk
+          disematkan ke website eksternal.<br>
+          ✅ <strong>Production Ready:</strong> Ya — Manajemen user, Groups, RBAC, dan log percakapan tersedia.
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Hasil Pengujian</td>
+        <td class="col">:</td>
+        <td>Open WebUI berhasil dikonfigurasi sebagai platform multi-departemen. Knowledge Base per dinas berhasil
+          dibuat dan diisolasi via Groups. Namun, tidak ditemukan fitur untuk mengekspos widget chat ke halaman website
+          eksternal — platform ini hanya dapat diakses melalui URL internal-nya sendiri. Ini menjadi hambatan kritis
+          untuk kebutuhan embed di website publik dinas.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kekuatan Platform</td>
+        <td class="col">:</td>
+        <td>1. Paling ringan — hanya ~500MB RAM, ideal untuk server resource terbatas.<br>2. UX terbaik — antarmuka
+          paling intuitif dan ramah pengguna non-teknis.<br>3. Update paling cepat — komunitas sangat aktif (50k+ GitHub
+          stars).<br>4. Manajemen user &amp; RBAC bawaan yang solid.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kelemahan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Tidak ada fitur Embed</strong> — Tidak dapat disematkan sebagai widget di website lain; ini
+          merupakan kegagalan kritis terhadap kriteria utama.<br>2. Agentic workflow sangat terbatas — hanya tool
+          calling, tidak ada pipeline visual.<br>3. Knowledge isolation tidak sempurna (soft isolation).<br>4. Tidak
+          cocok untuk menjadi public-facing chatbot di website instansi.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kesimpulan</td>
+        <td class="col">:</td>
+        <td>Open WebUI sangat baik sebagai platform chat internal untuk staf pemerintahan, namun <strong>gagal memenuhi
+            kriteria embeddable</strong> yang merupakan kebutuhan utama untuk menyematkan chatbot ke website publik
+          dinas. Platform ini lebih cocok sebagai "internal AI assistant" bukan "public chatbot." <strong>Tidak dipilih
+            sebagai solusi final.</strong></td>
+      </tr>
+      <tr>
+        <td class="lbl">Referensi</td>
+        <td class="col">:</td>
+        <td>Baek, T. (2024). <em>Open WebUI Documentation</em>. https://docs.openwebui.com |
+          https://github.com/open-webui/open-webui</td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- REVIEW 4: RAGFLOW -->
+  <div class="page">
+    <div class="review-title">REVIEW PLATFORM #4 — RAGFLOW</div>
+    <table class="rt">
+      <tr>
+        <td class="lbl">Judul</td>
+        <td class="col">:</td>
+        <td>RAGFlow – Deep Document Understanding-Based Open Source RAG Engine for Enterprise Multi-Tenant Knowledge
+          Management</td>
+      </tr>
+      <tr>
+        <td class="lbl">Jurnal/Platform</td>
+        <td class="col">:</td>
+        <td>InfiniFlow RAGFlow – ragflow.io/docs | GitHub: infiniflow/ragflow</td>
+      </tr>
+      <tr>
+        <td class="lbl">Versi &amp; Rilis</td>
+        <td class="col">:</td>
+        <td>v0.9.x – v0.12.x (2024), Docker Compose Enterprise Stack</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tahun</td>
+        <td class="col">:</td>
+        <td>2024</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pengembang</td>
+        <td class="col">:</td>
+        <td>InfiniFlow Team</td>
+      </tr>
+      <tr>
+        <td class="lbl">Reviewer</td>
+        <td class="col">:</td>
+        <td>___________________________</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal Review</td>
+        <td class="col">:</td>
+        <td>25 Juli 2026</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="sh">HASIL REVIEW</td>
+      </tr>
+      <tr>
+        <td class="lbl">Rumusan Masalah</td>
+        <td class="col">:</td>
+        <td>Apakah RAGFlow mampu memenuhi kebutuhan platform <em>self-hosted</em> dengan isolasi knowledge base antar
+          agent yang ketat (<em>hard isolation</em>), kemampuan <em>agentic workflow</em>, dan fitur <em>embed</em>
+          widget ke website dinas?</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tujuan / Ide Pokok</td>
+        <td class="col">:</td>
+        <td>RAGFlow bertujuan menjadi RAG engine kelas enterprise dengan kemampuan Deep Document Understanding (DDU) —
+          mampu mengekstraksi tabel, bagan, dan struktur kompleks dari PDF secara akurat. Dirancang khusus untuk
+          enterprise dengan multi-tenant hard isolation via RBAC native.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Metode / Teknologi</td>
+        <td class="col">:</td>
+        <td>Docker Compose stack: Python API + React Frontend + MySQL + MinIO + Redis + Infinity/Elasticsearch (vector
+          DB). DDU engine menggunakan PaddleOCR dan layout detection AI. Agent berbasis "Chat Apps" yang terikat ke
+          Dataset spesifik. Embed via API endpoint &amp; iframe widget bawaan.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Evaluasi Kriteria Utama</td>
+        <td class="col">:</td>
+        <td>
+          ✅ <strong>Self-hosted:</strong> Ya — Fully on-premise, 100% offline (air-gapped), mendukung Ollama lokal.<br>
+          ⚠️ <strong>Agentic Workflow:</strong> Parsial — Mendukung Agent mode dengan tool calling (web search, API
+          call, code), namun tidak ada workflow editor visual seperti Dify. Pipeline agentic bersifat linear, bukan
+          graph-based.<br>
+          ✅ <strong>Multi-Agent &amp; Knowledge Isolation:</strong> Ya — TERBAIK dari semua platform. Setiap "Chat App"
+          terikat ke Dataset tertentu secara hard. RBAC native memastikan staf Dinas A tidak bisa melihat Dataset Dinas
+          B secara teknis.<br>
+          ✅ <strong>Embeddable:</strong> Ya — Setiap Chat App memiliki embed URL dan iframe code yang dapat langsung
+          disematkan ke website.<br>
+          ✅ <strong>Production Ready:</strong> Ya — Enterprise-grade dengan user management, audit log, similarity
+          threshold konfigurasil, dan anti-hallucination "Empty Response."
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Hasil Pengujian</td>
+        <td class="col">:</td>
+        <td>RAGFlow berhasil di-deploy (port diubah ke 8080 untuk menghindari konflik). Model Ollama (Llama 3.2) dan
+          embedding (nomic-embed-text) terintegrasi. Dataset Kominfo &amp; Pariwisata dibuat terpisah. Akun staf
+          Pariwisata yang login tidak dapat melihat Dataset Kominfo — isolasi terbukti keras (hard isolation). Embed URL
+          Chat App berhasil ditampilkan di halaman web. Akurasi RAG 100% pada pertanyaan berbasis dokumen TXT.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kekuatan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Knowledge isolation terkuat</strong> — Hard isolation via RBAC; data completly terisolasi per
+          tenant.<br>2. <strong>Deep Document Understanding</strong> — Parsing dokumen PDF kompleks (tabel, bagan)
+          paling akurat.<br>3. Embed bawaan — Setiap Chat App langsung memiliki embed code.<br>4. Anti-hallucination
+          configurable — "Empty Response" jika tidak ada dokumen relevan.<br>5. Fully offline — 100% air-gapped, aman
+          untuk data pemerintahan.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kelemahan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Resource sangat tinggi</strong> — RAM 10–12 GB untuk infrastructure RAGFlow saja.<br>2. Agentic
+          workflow terbatas — Tidak ada workflow editor visual; agent bersifat linear.<br>3. Setup kompleks — 8+ Docker
+          container dengan risiko race condition saat startup.<br>4. Waktu boot lama (5–10 menit hingga semua service
+          healthy).</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kesimpulan</td>
+        <td class="col">:</td>
+        <td>RAGFlow adalah <strong>platform terpilih sebagai solusi final</strong> untuk proyek Diskominfo Sleman.
+          Keunggulannya pada hard isolation knowledge base antar agent, fitur embed bawaan, kualitas RAG tertinggi, dan
+          operasi 100% offline menjadikannya satu-satunya platform yang memenuhi seluruh kriteria keamanan dan
+          fungsional utama proyek ini, meskipun agentic workflow-nya masih lebih terbatas dibanding Dify.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Referensi</td>
+        <td class="col">:</td>
+        <td>InfiniFlow. (2024). <em>RAGFlow Documentation</em>. https://ragflow.io/docs |
+          https://github.com/infiniflow/ragflow</td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- REVIEW 5: NYAI / SUPPORT BOARD -->
+  <div class="page">
+    <div class="review-title">REVIEW PLATFORM #5 — NYAI &amp; SUPPORT BOARD</div>
+    <table class="rt">
+      <tr>
+        <td class="lbl">Judul</td>
+        <td class="col">:</td>
+        <td>Nyai &amp; Support Board – AI-Powered Multi-Channel Customer Service Platform with Knowledge Base
+          Integration</td>
+      </tr>
+      <tr>
+        <td class="lbl">Jurnal/Platform</td>
+        <td class="col">:</td>
+        <td>Support Board (board.support) &amp; Nyai (nyai.tech) – Dokumentasi Resmi</td>
+      </tr>
+      <tr>
+        <td class="lbl">Versi &amp; Rilis</td>
+        <td class="col">:</td>
+        <td>Support Board v3.x – v4.x (2024); Nyai sebagai AI Layer Cloud</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tahun</td>
+        <td class="col">:</td>
+        <td>2022–2024</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pengembang</td>
+        <td class="col">:</td>
+        <td>Schiocco &amp; Tim Support Board; Nyai sebagai AI integration provider</td>
+      </tr>
+      <tr>
+        <td class="lbl">Reviewer</td>
+        <td class="col">:</td>
+        <td>___________________________</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tanggal Review</td>
+        <td class="col">:</td>
+        <td>25 Juli 2026</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="sh">HASIL REVIEW</td>
+      </tr>
+      <tr>
+        <td class="lbl">Rumusan Masalah</td>
+        <td class="col">:</td>
+        <td>Apakah Nyai dan Support Board mampu memenuhi kebutuhan platform <em>self-hosted</em> dengan <em>agentic
+            workflow</em>, <em>multi-agent knowledge isolation</em>, dan kemampuan <em>embed</em> ke website
+          pemerintahan — terutama tanpa mengirim data ke server cloud pihak ketiga?</td>
+      </tr>
+      <tr>
+        <td class="lbl">Tujuan / Ide Pokok</td>
+        <td class="col">:</td>
+        <td>Support Board adalah platform live chat customer service yang dapat diintegrasikan dengan AI (melalui Nyai
+          atau OpenAI) untuk mengotomatiskan balasan pertanyaan umum. Nyai menyediakan layer AI berbasis cloud dengan
+          kemampuan knowledge base kustom. Keduanya difokuskan pada automasi customer service multi-channel (Web,
+          WhatsApp, Telegram).</td>
+      </tr>
+      <tr>
+        <td class="lbl">Metode / Teknologi</td>
+        <td class="col">:</td>
+        <td>Support Board: PHP backend + MySQL + JavaScript widget (dapat self-host di server sendiri). Nyai:
+          Cloud-based AI layer yang terhubung ke Support Board via API. Embed: Support Board menyediakan JavaScript
+          widget yang sangat mudah disematkan ke website manapun. Multi-channel via integrasi WhatsApp Business API,
+          Telegram Bot, Facebook Messenger.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Evaluasi Kriteria Utama</td>
+        <td class="col">:</td>
+        <td>
+          ⚠️ <strong>Self-hosted:</strong> Parsial — Support Board (PHP) dapat self-host, namun komponen AI (Nyai)
+          berjalan di cloud eksternal. Data percakapan dan dokumen dikirim ke server Nyai.<br>
+          ❌ <strong>Agentic Workflow:</strong> Tidak — Tidak ada fitur agentic workflow atau multi-step reasoning. AI
+          hanya bersifat Q&amp;A sederhana berbasis knowledge base.<br>
+          ❌ <strong>Multi-Agent &amp; Knowledge Isolation:</strong> Tidak — Tidak ada sistem multi-agent. Satu instalasi
+          hanya mendukung satu knowledge base global tanpa isolasi antar departemen.<br>
+          ✅ <strong>Embeddable:</strong> Ya — Widget JavaScript very easy to embed; ini justru kekuatan utama platform
+          ini.<br>
+          ⚠️ <strong>Production Ready:</strong> Parsial — Baik untuk customer service konvensional, namun ketergantungan
+          cloud Nyai menciptakan risiko keamanan data untuk pemerintahan.
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">Hasil Pengujian</td>
+        <td class="col">:</td>
+        <td>Widget Support Board berhasil disematkan ke halaman web simulasi dan chat berfungsi normal. AI via Nyai
+          mampu menjawab pertanyaan umum. Namun, tidak ditemukan cara untuk mengisolasi knowledge base antara Dinas
+          Kominfo dan Pariwisata dalam satu instalasi. Semua percakapan tersimpan di server Nyai (cloud), yang
+          bertentangan dengan kebijakan data sovereignty pemerintahan.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kekuatan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>Embeddable terbaik</strong> — Widget chat paling mudah dan rapi disematkan ke website.<br>2.
+          Multi-channel out-of-the-box — WhatsApp, Telegram, FB Messenger langsung tersedia.<br>3. Human escalation —
+          Fitur handover dari AI ke agen manusia tersedia native.<br>4. Ticket management — Pengelolaan pengaduan
+          masyarakat terintegrasi.<br>5. Setup paling sederhana — Cukup PHP hosting standar.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kelemahan Platform</td>
+        <td class="col">:</td>
+        <td>1. <strong>AI tidak self-hosted</strong> — Komponen Nyai berjalan di cloud; data sensitif pemerintah
+          terkirim ke server eksternal.<br>2. <strong>Tidak ada multi-agent isolation</strong> — Kegagalan kritis
+          terhadap kriteria utama.<br>3. <strong>Tidak ada agentic workflow</strong> — AI hanya Q&amp;A sederhana, tidak
+          bisa multi-step reasoning.<br>4. Kontrol AI sangat terbatas — Tidak ada konfigurasi threshold, empty response,
+          atau system prompt mendalam.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Kesimpulan</td>
+        <td class="col">:</td>
+        <td>Nyai &amp; Support Board unggul dalam hal embed dan multi-channel, namun <strong>gagal pada hampir semua
+            kriteria teknis utama</strong>: AI tidak self-hosted, tidak ada multi-agent isolation, dan tidak ada agentic
+          workflow. Platform ini lebih cocok untuk bisnis swasta yang memprioritaskan kemudahan setup dan multi-channel,
+          bukan untuk instansi pemerintah dengan kebutuhan keamanan data ketat. <strong>Tidak dipilih sebagai solusi
+            final.</strong></td>
+      </tr>
+      <tr>
+        <td class="lbl">Referensi</td>
+        <td class="col">:</td>
+        <td>Support Board. (2024). <em>Support Board Documentation</em>. https://board.support/docs<br>Nyai. (2024).
+          <em>Nyai – AI for Businesses</em>. https://nyai.tech
+        </td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+  <!-- HALAMAN KOMPARASI & PENUTUP -->
+  <div class="page">
+    <div class="review-title">TABEL KOMPARASI &amp; KESIMPULAN AKHIR</div>
+    <p style="margin-bottom:10px;font-size:11pt;"><strong>Tujuan Review:</strong> Menemukan platform <em>self-hosted
+        agentic workflow</em> yang mendukung <em>multi-agent</em> dengan isolasi knowledge base per agen dan dapat
+      di-<em>embed</em> ke website instansi pemerintah.</p>
+
+    <table class="criteria">
+      <thead>
+        <tr>
+          <th style="text-align:left;width:30%;">Kriteria Evaluasi</th>
+          <th>Flowise</th>
+          <th>Dify</th>
+          <th>Open WebUI</th>
+          <th>RAGFlow</th>
+          <th>Nyai/SB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f9f9f9">
+          <td class="lft">Self-Hosted (On-premise)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>⚠️</td>
+        </tr>
+        <tr>
+          <td class="lft">Agentic Workflow Visual</td>
+          <td>✅</td>
+          <td>✅✅</td>
+          <td>⚠️</td>
+          <td>⚠️</td>
+          <td>❌</td>
+        </tr>
+        <tr style="background:#f9f9f9">
+          <td class="lft">Multi-Agent Knowledge Isolation</td>
+          <td>⚠️</td>
+          <td>✅</td>
+          <td>⚠️</td>
+          <td>✅✅</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td class="lft">Embeddable (Widget/iframe)</td>
+          <td>✅✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅✅</td>
+        </tr>
+        <tr style="background:#f9f9f9">
+          <td class="lft">100% Offline / Air-Gapped</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td class="lft">Parsing Dokumen Kompleks</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+        </tr>
+        <tr style="background:#f9f9f9">
+          <td class="lft">Kebutuhan RAM</td>
+          <td>Ringan (&lt;1GB)</td>
+          <td>Berat (&gt;8GB)</td>
+          <td>Sangat Ringan</td>
+          <td>Sangat Berat (&gt;12GB)</td>
+          <td>Ringan</td>
+        </tr>
+        <tr>
+          <td class="lft">Kemudahan Setup</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr style="background:#fff3cd">
+          <td class="lft"><strong>Status Akhir</strong></td>
+          <td>Prototipe</td>
+          <td>Kandidat Kuat</td>
+          <td>Chat Internal</td>
+          <td><strong>✅ FINAL</strong></td>
+          <td>Tidak dipilih</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note" style="margin-top:14px;">
+      <strong>📌 Kesimpulan Akhir Seleksi Platform:</strong><br><br>
+      Berdasarkan evaluasi terhadap 5 kriteria utama — self-hosted, agentic workflow, multi-agent knowledge isolation,
+      embeddable, dan production ready — <strong>RAGFlow</strong> terpilih sebagai solusi final proyek Diskominfo Sleman
+      dengan alasan:<br><br>
+      1. Satu-satunya platform dengan <strong>knowledge isolation bersifat hard isolation</strong> (data antar dinas
+      benar-benar tidak bisa saling diakses secara teknis).<br>
+      2. Memiliki <strong>fitur embed bawaan</strong> yang memungkinkan Chat App disematkan langsung ke website
+      dinas.<br>
+      3. Beroperasi <strong>100% offline</strong> — tidak ada data yang keluar ke server eksternal, memenuhi standar
+      keamanan data pemerintahan.<br>
+      4. <strong>Kualitas RAG tertinggi</strong> dengan Deep Document Understanding untuk dokumen pemerintahan yang
+      kompleks.<br><br>
+      Dify diakui sebagai platform yang paling lengkap secara fitur (terutama agentic workflow visual), namun kendala
+      resource yang besar tidak memungkinkan implementasi di infrastruktur yang tersedia. Flowise dinilai berharga untuk
+      fase prototyping awal. Open WebUI efektif sebagai alat chat internal staf, sementara Nyai/Support Board berguna
+      untuk referensi solusi customer service publik berbasis multi-channel.
+    </div>
+
+    <br>
+    <table style="width:100%;font-size:11pt;margin-top:10px;">
+      <tr>
+        <td style="width:50%;text-align:center;padding-top:50px;">
+          <p>Mengetahui,</p>
+          <p>Pembimbing Lapangan</p>
+          <br><br><br>
+          <p>(______________________)</p>
+        </td>
+        <td style="width:50%;text-align:center;padding-top:50px;">
+          <p>Sleman, 25 Juli 2026</p>
+          <p>Reviewer / Mahasiswa Magang</p>
+          <br><br><br>
+          <p>(______________________)</p>
+        </td>
+      </tr>
+    </table>
+    <p class="ft">Template Review Jurnal/Literature Review – Kalam Practica Media | Laporan Magang Diskominfo Sleman
+      2026</p>
+  </div>
+
+</body>
+
+</html>

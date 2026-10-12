@@ -1,0 +1,252 @@
+[
+  {
+    "id": "agent-dukcapil",
+    "name": "Dukcapil Layanan Kependudukan",
+    "slug": "dukcapil-layanan",
+    "department": "Dinas Kependudukan dan Pencatatan Sipil",
+    "description": "Membantu warga dalam permohonan KTP-el baru, pengurusan KK, Kartu Identitas Anak (KIA), dan Akta",
+    "trigger": "Ketika pengguna ingin mengurus atau menanyakan permohonan KTP baru, Kartu Keluarga (KK), KIA, Akta Kelahiran/Kematian, atau jadwal perekaman data di Sleman",
+    "fallback_keywords": [
+      "ktp",
+      "ktp baru",
+      "kartu keluarga",
+      "kk",
+      "kia",
+      "akta",
+      "perekaman",
+      "nik",
+      "dukcapil",
+      "pindah domisili"
+    ],
+    "persona": "professional",
+    "enabled": true,
+    "steps": [
+      {
+        "id": "step-1",
+        "type": "prompt",
+        "title": "Sambut & Tanyakan Layanan",
+        "prompt": "Selamat datang di Layanan AI Mandiri Dinas Kependudukan dan Catatan Sipil Kabupaten Sleman. Silakan pilih jenis layanan administrasi kependudukan yang ingin Anda proses:",
+        "quick_replies": [
+          "KTP-el Baru (Pemula)",
+          "Penerbitan KK Baru",
+          "Kartu Identitas Anak (KIA)",
+          "Akta Kelahiran"
+        ]
+      },
+      {
+        "id": "step-2",
+        "type": "collect_input",
+        "title": "Pilihan Layanan",
+        "variable_name": "layanan_dipilih",
+        "input_type": "option",
+        "prompt": "Mohon pilih salah satu layanan di atas atau ketik jenis permohonan Anda:",
+        "options": [
+          "KTP-el Baru (Pemula)",
+          "Penerbitan KK Baru",
+          "Kartu Identitas Anak (KIA)",
+          "Akta Kelahiran"
+        ]
+      },
+      {
+        "id": "step-3",
+        "type": "collect_input",
+        "title": "Nama Lengkap Pemohon",
+        "variable_name": "nama_pemohon",
+        "input_type": "text",
+        "prompt": "Terima kasih. Mohon informasikan Nama Lengkap pemohon sesuai Kartu Keluarga:"
+      },
+      {
+        "id": "step-4",
+        "type": "collect_input",
+        "title": "16 Digit NIK",
+        "variable_name": "nik_pemohon",
+        "input_type": "number",
+        "prompt": "Mohon masukkan 16 digit Nomor Induk Kependudukan (NIK) pemohon untuk pengecekan data:"
+      },
+      {
+        "id": "step-5",
+        "type": "collect_input",
+        "title": "Nomor WhatsApp Pemohon",
+        "variable_name": "no_whatsapp",
+        "input_type": "phone",
+        "prompt": "Mohon cantumkan Nomor WhatsApp aktif untuk konfirmasi jadwal antrean dan tiket barcode:"
+      },
+      {
+        "id": "step-6",
+        "type": "workflow",
+        "title": "Validasi Kuota & Generate Tiket",
+        "connector_id": "conn-dukcapil-queue",
+        "action_name": "generate_queue_ticket"
+      },
+      {
+        "id": "step-7",
+        "type": "response",
+        "title": "Konfirmasi Pendaftaran & SOP",
+        "message": "Terima kasih Bpk/Ibu {nama_pemohon}! Permohonan layanan **{layanan_dipilih}** Anda telah berhasil dicatat dengan Nomor Antrean Tiket **#{ticket_code}**.\n\n📌 **Berkas Wajib Dibawa saat Datang ke Kantor:**\n• Kartu Keluarga (KK) Asli\n• Formulir Pendaftaran F-1.21 yang sudah ditandatangani\n• Berkas pendukung sesuai permohonan\n\nNotifikasi jadwal antrean & bukti barcode telah dikirimkan ke nomor WhatsApp **{no_whatsapp}**. Terima kasih telah menggunakan layanan digital Pemkab Sleman."
+      }
+    ]
+  },
+  {
+    "id": "agent-wisata",
+    "name": "Pariwisata & Destinasi Sleman",
+    "slug": "wisata-sleman",
+    "department": "Dinas Pariwisata Kabupaten Sleman",
+    "description": "Panduan kanca dolan untuk reservasi destinasi candi, Jeep Lava Tour Merapi, desa wisata, dan agenda event",
+    "trigger": "Ketika pengguna menanyakan rekomendasi tempat liburan, tiket Candi Prambanan/Ratu Boko, Lava Tour Merapi, Desa Wisata, atau info hotel di Kabupaten Sleman",
+    "fallback_keywords": [
+      "wisata",
+      "liburan",
+      "candi",
+      "prambanan",
+      "merapi",
+      "lava tour",
+      "kaliurang",
+      "desa wisata",
+      "pariwisata"
+    ],
+    "persona": "friendly",
+    "enabled": true,
+    "steps": [
+      {
+        "id": "step-1",
+        "type": "prompt",
+        "title": "Sapaan Ramah Wisata",
+        "prompt": "Sugeng rawuh ing Sleman! 🌿 Halo Sobat Wisata, saya siap memandu liburan serumu di bumi Sembada. Destinasi impian apa yang ingin kamu kunjungi?",
+        "quick_replies": [
+          "Jeep Lava Tour Merapi",
+          "Candi Prambanan & Sambisari",
+          "Desa Wisata Pentingsari",
+          "Wisata Alam Kaliurang"
+        ]
+      },
+      {
+        "id": "step-2",
+        "type": "collect_input",
+        "title": "Pilihan Destinasi",
+        "variable_name": "destinasi_wisata",
+        "input_type": "option",
+        "prompt": "Pilih destinasi favoritmu dari opsi di atas atau tuliskan nama tempat wisata:",
+        "options": [
+          "Jeep Lava Tour Merapi",
+          "Candi Prambanan & Sambisari",
+          "Desa Wisata Pentingsari",
+          "Wisata Alam Kaliurang"
+        ]
+      },
+      {
+        "id": "step-3",
+        "type": "collect_input",
+        "title": "Jumlah Wisatawan",
+        "variable_name": "jumlah_peserta",
+        "input_type": "number",
+        "prompt": "Berapa jumlah orang dalam rombongan wisatamu?"
+      },
+      {
+        "id": "step-4",
+        "type": "collect_input",
+        "title": "Tanggal Kunjungan",
+        "variable_name": "tgl_kunjungan",
+        "input_type": "date",
+        "prompt": "Kapan rencana tanggal kedatanganmu ke Sleman?"
+      },
+      {
+        "id": "step-5",
+        "type": "collect_input",
+        "title": "Kontak Email/WA",
+        "variable_name": "kontak_wisatawan",
+        "input_type": "phone",
+        "prompt": "Boleh minta nomor WhatsApp aktif untuk kirim e-voucher & panduan rute wisata?"
+      },
+      {
+        "id": "step-6",
+        "type": "workflow",
+        "title": "Cek Slot Destinasi",
+        "connector_id": "conn-wisata-booking",
+        "action_name": "book_destination"
+      },
+      {
+        "id": "step-7",
+        "type": "response",
+        "title": "Rangkuman Paket Wisata",
+        "message": "Wah mantap sekali! 🎉 Rencana trip ke **{destinasi_wisata}** untuk **{jumlah_peserta} orang** pada tanggal **{tgl_kunjungan}** telah kami daftarkan dengan Kode Booking **#{booking_ref}**.\n\nE-Guidebook dan rekomendasi kuliner khas Sleman (seperti Salak Pondoh & Jadah Tempe) sudah kami siapkan. Selamat menikmati pesona Sleman! ✨"
+      }
+    ]
+  },
+  {
+    "id": "agent-pengaduan",
+    "name": "Layanan Pengaduan & Aspirasi Warga",
+    "slug": "pengaduan-layanan",
+    "department": "Dinas Komunikasi dan Informatika",
+    "description": "Penerimaan aspirasi, kendala infrastruktur publik, wifi publik padukuhan, dan pelaporan terintegrasi",
+    "trigger": "Ketika warga ingin menyampaikan aduan gangguan internet gratis, lampu penerangan, jalan rusak, atau aspirasi layanan publik Pemkab Sleman",
+    "fallback_keywords": [
+      "aduan",
+      "lapor",
+      "keluhan",
+      "komplain",
+      "wifi mati",
+      "rusak",
+      "aspirasi",
+      "lapor sleman"
+    ],
+    "persona": "empathetic",
+    "enabled": true,
+    "steps": [
+      {
+        "id": "step-1",
+        "type": "prompt",
+        "title": "Sambut & Dengar Aduan",
+        "prompt": "Terima kasih telah menghubungi Kanal Aspirasi dan Pengaduan Pemkab Sleman. Kami hadir untuk mendengar dan menindaklanjuti kendala Anda. Apa kategori aduan Anda?",
+        "quick_replies": [
+          "Jaringan Wifi Padukuhan Bermasalah",
+          "Aplikasi / Layanan Online Pemda Error",
+          "Infrastruktur & Fasilitas Publik",
+          "Lainnya"
+        ]
+      },
+      {
+        "id": "step-2",
+        "type": "collect_input",
+        "title": "Kategori Pengaduan",
+        "variable_name": "kategori_aduan",
+        "input_type": "option",
+        "prompt": "Silakan pilih salah satu kategori pengaduan di atas:",
+        "options": [
+          "Jaringan Wifi Padukuhan Bermasalah",
+          "Aplikasi / Layanan Online Pemda Error",
+          "Infrastruktur & Fasilitas Publik",
+          "Lainnya"
+        ]
+      },
+      {
+        "id": "step-3",
+        "type": "collect_input",
+        "title": "Uraian Masalah & Lokasi",
+        "variable_name": "uraian_aduan",
+        "input_type": "text",
+        "prompt": "Mohon jelaskan secara singkat detail kendala beserta lokasi (Nama Dusun / Kapanewon / Alamat):"
+      },
+      {
+        "id": "step-4",
+        "type": "collect_input",
+        "title": "Nomor WhatsApp Pelapor",
+        "variable_name": "wa_pelapor",
+        "input_type": "phone",
+        "prompt": "Mohon masukkan nomor WhatsApp Anda agar tim teknis Diskominfo dapat menginformasikan progres penanganan:"
+      },
+      {
+        "id": "step-5",
+        "type": "workflow",
+        "title": "Eskalasi Tiket Pengaduan",
+        "connector_id": "conn-ticket-system",
+        "action_name": "create_support_ticket"
+      },
+      {
+        "id": "step-6",
+        "type": "response",
+        "title": "Tiket Diterbitkan",
+        "message": "Laporan Anda telah berhasil kami teruskan ke unit teknis terkait dengan Nomor Tiket Aduan: **#SLM-{ticket_id}**.\n\n📌 **Ringkasan Laporan:**\n• Kategori: {kategori_aduan}\n• Lokasi / Detail: {uraian_aduan}\n• Status: *Dalam Antrean Tindak Lanjut Tim Teknis (SLA: Maksimal 2x24 Jam)*\n\nUpdate perkembangan akan dikirimkan langsung ke nomor {wa_pelapor}. Terima kasih atas kepedulian Anda dalam mewujudkan Sleman yang lebih baik."
+      }
+    ]
+  }
+]

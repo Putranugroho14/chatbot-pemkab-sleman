@@ -1,0 +1,35 @@
+DOKUMEN PERSYARATAN PELAYANAN DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL (DUKCAPIL) KABUPATEN SLEMAN
+
+A. SYARAT KARTU IDENTITAS ANAK (KIA)
+1. Fotokopi Kutipan Akta Kelahiran Anak.
+2. Kartu Keluarga (KK) Asli orang tua/wali.
+3. KTP-el Asli kedua orang tua/wali.
+4. Pas Foto Anak berwarna ukuran 2x3 sebanyak 2 (dua) lembar (bagi anak yang sudah berumur di atas 5 tahun dan di bawah 17 tahun). Tahun ganjil background merah, tahun genap background biru.
+
+B. SYARAT KTP ELEKTRONIK (KTP-EL) BARU (PEMULA)
+1. Telah berusia 17 tahun, sudah kawin, atau pernah kawin.
+2. Kartu Keluarga (KK) Asli.
+3. Mengisi formulir pendaftaran (F-1.21).
+4. Pemohon harus datang langsung ke tempat pelayanan (Kecamatan/Dinas) untuk perekaman biometrik (foto, sidik jari, iris mata, dan tanda tangan).
+
+C. SYARAT PENERBITAN KARTU KELUARGA (KK) BARU (KARENA MEMBENTUK KELUARGA BARU / MENIKAH)
+1. Buku Nikah/Kutipan Akta Perkawinan.
+2. Kartu Keluarga (KK) Asli pihak suami dan istri.
+3. KTP-el Asli suami dan istri.
+4. Surat Keterangan Pindah Datang (bagi yang berasal dari luar daerah).
+
+D. SYARAT AKTA KELAHIRAN
+1. Surat Keterangan Lahir asli dari dokter/bidan/rumah sakit.
+2. Buku Nikah / Kutipan Akta Perkawinan orang tua.
+3. Kartu Keluarga (KK) dan KTP-el Asli orang tua.
+4. Fotokopi KTP-el 2 (dua) orang saksi (harus hadir jika pelayanan di dinas/kecamatan tertentu).
+
+E. SYARAT AKTA KEMATIAN
+1. Surat Keterangan Kematian dari desa/kelurahan (F-2.29).
+2. Surat Keterangan Kematian dari dokter/paramedis (jika meninggal di fasilitas kesehatan).
+3. KK asli dan KTP-el asli milik jenazah (jika ada).
+4. Fotokopi KTP-el pelapor dan 2 orang saksi.
+
+---
+Dokumen ini dibuat otomatis sebagai bahan uji coba (dummy data) untuk pelatihan AI Dify.
+Diambil referensinya dari web Dukcapil Sleman.

@@ -1,0 +1,76 @@
+[
+  {
+    "id": "conn-dukcapil-queue",
+    "name": "Sistem Antrean & Verifikasi Dukcapil",
+    "url": "https://api.dukcapil.slemankab.go.id/v1/antrean/create",
+    "method": "POST",
+    "auth_type": "Bearer Token",
+    "auth_token": "sk-sleman-dukcapil-demo-key",
+    "param_mapping": [
+      { "api_param": "nama", "convo_var": "{nama_pemohon}" },
+      { "api_param": "nik", "convo_var": "{nik_pemohon}" },
+      { "api_param": "phone", "convo_var": "{no_whatsapp}" },
+      { "api_param": "layanan", "convo_var": "{layanan_dipilih}" }
+    ],
+    "response_mapping": [
+      { "response_path": "$.data.ticket_code", "variable_name": "ticket_code" },
+      { "response_path": "$.data.estimated_time", "variable_name": "estimasi_waktu" }
+    ],
+    "mock_response": {
+      "status": "success",
+      "data": {
+        "ticket_code": "DKP-2026-8819",
+        "estimated_time": "Besok, 09.30 WIB di MPP Sleman"
+      }
+    }
+  },
+  {
+    "id": "conn-wisata-booking",
+    "name": "Booking Engine Pariwisata Sleman",
+    "url": "https://pariwisata.slemankab.go.id/api/v2/booking",
+    "method": "POST",
+    "auth_type": "Bearer Token",
+    "auth_token": "sk-tour-sleman-live-2026",
+    "param_mapping": [
+      { "api_param": "destination", "convo_var": "{destinasi_wisata}" },
+      { "api_param": "pax", "convo_var": "{jumlah_peserta}" },
+      { "api_param": "visit_date", "convo_var": "{tgl_kunjungan}" },
+      { "api_param": "contact", "convo_var": "{kontak_wisatawan}" }
+    ],
+    "response_mapping": [
+      { "response_path": "$.data.booking_ref", "variable_name": "booking_ref" },
+      { "response_path": "$.data.total_amount", "variable_name": "total_biaya" }
+    ],
+    "mock_response": {
+      "status": "success",
+      "data": {
+        "booking_ref": "TOUR-SLM-4192",
+        "total_biaya": "Rp 350.000 (estimasi)"
+      }
+    }
+  },
+  {
+    "id": "conn-ticket-system",
+    "name": "Lapor Sleman Ticketing Webhook",
+    "url": "https://lapor.slemankab.go.id/api/tickets",
+    "method": "POST",
+    "auth_type": "API Key",
+    "auth_token": "apikey-laporsleman-production",
+    "param_mapping": [
+      { "api_param": "category", "convo_var": "{kategori_aduan}" },
+      { "api_param": "detail", "convo_var": "{uraian_aduan}" },
+      { "api_param": "phone", "convo_var": "{wa_pelapor}" }
+    ],
+    "response_mapping": [
+      { "response_path": "$.ticket.id", "variable_name": "ticket_id" },
+      { "response_path": "$.ticket.priority", "variable_name": "prioritas" }
+    ],
+    "mock_response": {
+      "status": "created",
+      "ticket": {
+        "id": "7821",
+        "priority": "Tinggi"
+      }
+    }
+  }
+]

@@ -1,0 +1,309 @@
+=== PARAGRAPHS ===
+
+[0] STYLE=Normal
+     TEXT=JUDUL CAPSTONE PROJECT
+
+[2] STYLE=Normal
+     TEXT=KERJA PRAKTEK PROJECT
+
+[6] STYLE=Normal
+     TEXT=Disusun oleh :
+
+[9] STYLE=Normal
+     TEXT=PROGRAM STUDI TEKNOLOGI INFORMASI
+
+[10] STYLE=Normal
+     TEXT=FAKULTAS TEKNIK
+
+[11] STYLE=Normal
+     TEXT=UNIVERSITAS MUHAMMADIYAH YOGYAKARTA
+
+[12] STYLE=Normal
+     TEXT=2026
+
+[13] STYLE=Heading 1
+     TEXT=DAFTAR ISI
+
+[16] STYLE=Heading 1
+     TEXT=DAFTAR TABEL
+
+[17] STYLE=table of figures
+     TEXT=Tabel 1. 1 Contoh Tabel	6
+
+[21] STYLE=Heading 1
+     TEXT=DAFTAR GAMBAR
+
+[23] STYLE=table of figures
+     TEXT=Gambar 1.1 Contoh Gambar 	2
+
+[25] STYLE=Heading 1
+     TEXT=DAFTAR ISTILAH
+
+[27] STYLE=Normal
+     TEXT=Note : Jika Ada
+
+[29] STYLE=Heading 1
+     TEXT=BAB I. 
+PENDAHULUAN
+
+[30] STYLE=List Paragraph
+     TEXT=Latar Belakang
+
+[31] STYLE=List Paragraph
+     TEXT=Perkembangan teknologi kecerdasan buatan (Artificial Intelligence atau AI) telah membawa perubahan dalam berbagai bidang, termasuk pelayanan informasi pada instansi pemerintah. Salah satu penerapan AI yang semakin banyak digunakan adalah AI Chatbot, yaitu sistem yang mampu berinteraksi dengan pengguna melalui percakapan alami untuk memberikan informasi maupun menjawab pertanyaan secara otomatis. K
+
+[32] STYLE=List Paragraph
+     TEXT=Sebagai instansi yang bertanggung jawab dalam pengelolaan informasi dan layanan komunikasi publik, Dinas Komunikasi dan Informatika (Diskominfo) Kabupaten Sleman memiliki peran penting dalam menyediakan akses informasi yang mudah bagi masyarakat. Informasi yang dibutuhkan masyarakat mencakup berbagai aspek, seperti profil Kabupaten Sleman, layanan pemerintahan, pariwisata, pendidikan, kesehatan, a
+
+[33] STYLE=List Paragraph
+     TEXT=Salah satu solusi yang dapat diterapkan adalah pengembangan AI Chatbot yang dapat diintegrasikan ke dalam website resmi pemerintah daerah. Dengan adanya chatbot tersebut, masyarakat dapat memperoleh informasi mengenai Kabupaten Sleman secara lebih praktis melalui percakapan interaktif tanpa harus mencari informasi secara manual pada berbagai halaman website. Selain meningkatkan kemudahan akses inf
+
+[34] STYLE=List Paragraph
+     TEXT=Namun, dalam implementasinya terdapat berbagai platform AI Chatbot yang memiliki karakteristik, kelebihan, dan keterbatasan yang berbeda. Setiap platform menawarkan fitur yang beragam, seperti kemampuan dijalankan secara self-hosted, dukungan terhadap agentic workflow, pengelolaan knowledge base, kemampuan multi-agent, serta integrasi chatbot ke dalam website melalui fitur embedding. Perbedaan kem
+
+[35] STYLE=List Paragraph
+     TEXT=Berdasarkan kondisi tersebut, selama pelaksanaan magang di Dinas Komunikasi dan Informatika Kabupaten Sleman dilakukan kegiatan kajian komparatif terhadap beberapa platform AI Chatbot, yaitu Flowise, Dify, Open WebUI, RAGFlow, serta NyAI & Support Board. Kajian ini bertujuan untuk membandingkan kemampuan masing-masing platform berdasarkan beberapa kriteria utama, yaitu kemampuan self-hosted, dukun
+
+[36] STYLE=List Paragraph
+     TEXT=Rumusan Masalah
+
+[37] STYLE=Normal
+     TEXT=Berdasarkan latar belakang tersebut, rumusan masalah dalam laporan magang ini adalah sebagai berikut.
+
+[38] STYLE=List Paragraph
+     TEXT=Bagaimana membandingkan karakteristik dan kemampuan beberapa platform AI Chatbot untuk mendukung layanan informasi di Dinas Komunikasi dan Informatika Kabupaten Sleman?
+
+[39] STYLE=List Paragraph
+     TEXT=Platform AI Chatbot manakah yang paling sesuai untuk diimplementasikan sebagai layanan informasi berbasis AI pada website Pemerintah Kabupaten Sleman?
+
+[40] STYLE=List Paragraph
+     TEXT=Tujuan Capstone Project
+
+[41] STYLE=Normal
+     TEXT=Tujuan penyusunan laporan magang ini adalah:
+
+[42] STYLE=List Paragraph
+     TEXT=Melakukan kajian komparatif terhadap beberapa platform AI Chatbot yang dapat diterapkan pada instansi pemerintah.
+
+[43] STYLE=List Paragraph
+     TEXT=Menganalisis kelebihan dan kekurangan setiap platform berdasarkan kebutuhan implementasi di Diskominfo Kabupaten Sleman.
+
+[44] STYLE=List Paragraph
+     TEXT=Menentukan platform AI Chatbot yang paling sesuai sebagai dasar pengembangan layanan informasi digital bagi masyarakat Kabupaten Sleman.
+
+[45] STYLE=List Paragraph
+     TEXT=Manfaat Capstone Project
+
+[46] STYLE=List Paragraph
+     TEXT=Bagi Diskominfo Kabupaten Sleman
+
+[47] STYLE=List Paragraph
+     TEXT=Memberikan rekomendasi platform AI Chatbot yang sesuai dengan kebutuhan instansi untuk mendukung pelayanan informasi kepada masyarakat.
+
+[48] STYLE=List Paragraph
+     TEXT=Bagi Masyarakat
+
+[49] STYLE=List Paragraph
+     TEXT=Memberikan gambaran mengenai pemanfaatan AI Chatbot sebagai media layanan informasi yang dapat membantu masyarakat memperoleh informasi mengenai Kabupaten Sleman secara lebih mudah, cepat, dan interaktif.
+
+[51] STYLE=List Paragraph
+     TEXT=Bagi Mahasiswa
+
+[52] STYLE=List Paragraph
+     TEXT=Menambah pengalaman dan pemahaman mengenai implementasi teknologi AI Chatbot, proses evaluasi platform, serta penerapan teknologi kecerdasan buatan dalam mendukung transformasi digital pada instansi pemerintah.
+
+[55] STYLE=Heading 1
+     TEXT=BAB II. 
+TINJAUAN PUSTAKA
+
+[59] STYLE=Normal
+     TEXT=Artificial Intelligence (AI)
+
+[60] STYLE=Normal
+     TEXT=Artificial Intelligence (AI) atau kecerdasan buatan merupakan cabang ilmu komputer yang berfokus pada pengembangan sistem yang mampu meniru kemampuan berpikir manusia dalam menyelesaikan suatu permasalahan. AI memungkinkan komputer melakukan berbagai aktivitas seperti memahami bahasa, mengenali pola, mengambil keputusan, serta memberikan rekomendasi berdasarkan data yang tersedia. Perkembangan AI 
+
+[61] STYLE=Normal
+     TEXT=Dalam lingkungan pemerintahan, AI mulai dimanfaatkan untuk meningkatkan kualitas pelayanan kepada masyarakat melalui otomatisasi berbagai proses administrasi maupun penyediaan layanan informasi secara digital. Salah satu implementasi AI yang berkembang pesat adalah AI Chatbot, yang memungkinkan masyarakat memperoleh informasi secara cepat melalui percakapan berbasis bahasa alami.
+
+[62] STYLE=Normal
+     TEXT=AI Chatbot
+
+[63] STYLE=Normal
+     TEXT=AI Chatbot merupakan aplikasi berbasis kecerdasan buatan yang dirancang untuk berkomunikasi dengan pengguna menggunakan bahasa alami (Natural Language Processing atau NLP). Berbeda dengan chatbot konvensional yang hanya mengandalkan aturan (rule-based), AI Chatbot mampu memahami konteks pertanyaan dan menghasilkan jawaban yang lebih relevan menggunakan model bahasa (Large Language Model).
+
+[64] STYLE=Normal
+     TEXT=Dalam instansi pemerintahan, AI Chatbot dapat dimanfaatkan sebagai media pelayanan informasi digital yang mampu menjawab pertanyaan masyarakat mengenai layanan publik, informasi daerah, administrasi, maupun berbagai informasi lainnya selama tersedia dalam basis pengetahuan (knowledge base). Kehadiran AI Chatbot diharapkan mampu meningkatkan aksesibilitas informasi serta mendukung pelayanan yang te
+
+[65] STYLE=Normal
+     TEXT=Large Language Model (LLM)
+
+[66] STYLE=Normal
+     TEXT=Large Language Model (LLM) merupakan model kecerdasan buatan yang dilatih menggunakan data teks dalam jumlah sangat besar sehingga mampu memahami, menghasilkan, serta menganalisis bahasa manusia. LLM menjadi teknologi utama yang digunakan dalam berbagai aplikasi AI modern, termasuk ChatGPT, Gemini, Claude, dan model lokal seperti Llama.
+
+[67] STYLE=Normal
+     TEXT=Dalam implementasi AI Chatbot, LLM berperan sebagai mesin utama yang menghasilkan jawaban berdasarkan pertanyaan pengguna. Namun, kemampuan LLM saja belum cukup apabila informasi yang dibutuhkan bersifat spesifik, seperti dokumen pemerintahan atau informasi internal instansi. Oleh karena itu, diperlukan mekanisme tambahan berupa Retrieval-Augmented Generation (RAG).
+
+[68] STYLE=Normal
+     TEXT=Retrieval-Augmented Generation (RAG)
+
+[69] STYLE=Normal
+     TEXT=Retrieval-Augmented Generation (RAG) merupakan metode yang menggabungkan kemampuan pencarian dokumen dengan kemampuan generasi jawaban dari Large Language Model. Pada metode ini, sistem terlebih dahulu mencari informasi yang relevan dari dokumen yang tersimpan dalam knowledge base, kemudian informasi tersebut digunakan sebagai konteks bagi model AI dalam menghasilkan jawaban.
+
+[70] STYLE=Normal
+     TEXT=Penerapan RAG memungkinkan AI Chatbot memberikan jawaban yang lebih sesuai dengan dokumen yang dimiliki instansi dibandingkan hanya mengandalkan pengetahuan bawaan model. Oleh karena itu, metode ini banyak digunakan dalam pengembangan chatbot yang membutuhkan informasi spesifik, seperti pelayanan publik, peraturan daerah, maupun dokumen pemerintahan.
+
+[71] STYLE=Normal
+     TEXT=Self-Hosted AI Chatbot
+
+[72] STYLE=Normal
+     TEXT=Self-hosted AI Chatbot merupakan sistem chatbot yang dijalankan pada server milik organisasi tanpa bergantung pada layanan cloud pihak ketiga. Seluruh proses penyimpanan data, pengelolaan dokumen, hingga komunikasi dengan model AI dilakukan di lingkungan infrastruktur yang dimiliki sendiri.
+
+[73] STYLE=Normal
+     TEXT=Bagi instansi pemerintah, pendekatan self-hosted memiliki beberapa keuntungan, antara lain menjaga keamanan data, meningkatkan kendali terhadap sistem, serta mendukung penerapan kebijakan kedaulatan data (data sovereignty). Oleh karena itu, kemampuan menjalankan platform secara self-hosted menjadi salah satu aspek penting dalam proses evaluasi platform AI Chatbot selama kegiatan magang.
+
+[74] STYLE=Normal
+     TEXT=Platform AI Chatbot
+
+[75] STYLE=Normal
+     TEXT=Platform AI Chatbot merupakan perangkat lunak yang menyediakan berbagai fitur untuk membangun, mengelola, dan mengimplementasikan chatbot berbasis AI. Setiap platform memiliki karakteristik yang berbeda, baik dari sisi kemudahan penggunaan, dukungan terhadap AI Agent, pengelolaan knowledge base, kemampuan integrasi dengan website, maupun kebutuhan sumber daya server.
+
+[77] STYLE=Normal
+     TEXT=Pada kegiatan magang ini dilakukan kajian komparatif terhadap lima platform AI Chatbot, yaitu Flowise, Dify, Open WebUI, RAGFlow, serta NyAI & Support Board. Kelima platform tersebut dipilih karena memiliki pendekatan yang berbeda dalam pengembangan chatbot berbasis AI dan banyak digunakan sebagai solusi implementasi chatbot modern. Evaluasi dilakukan berdasarkan beberapa kriteria utama, yaitu kem
+
+[80] STYLE=Heading 1
+     TEXT=BAB III. 
+METODE PELAKSANAAN MAGANG
+
+[86] STYLE=Normal
+     TEXT=Tempat dan Waktu Pelaksanaan Magang
+
+[87] STYLE=Normal
+     TEXT=Kemukakan
+
+[88] STYLE=Normal
+     TEXT=Metode Pelaksanaan
+
+[89] STYLE=Normal
+     TEXT=Metode pelaksanaan yang digunakan dalam kegiatan magang ini berupa studi komparatif terhadap beberapa platform AI Chatbot. Kegiatan dilakukan dengan mempelajari dokumentasi resmi masing-masing platform, melakukan instalasi secara mandiri, menguji fitur-fitur utama, kemudian membandingkan hasil pengujian berdasarkan kebutuhan implementasi di lingkungan Dinas Komunikasi dan Informatika Kabupaten Sle
+
+[90] STYLE=Normal
+     TEXT=Adapun tahapan pelaksanaan kegiatan meliputi:
+
+[91] STYLE=Normal
+     TEXT=Identifikasi kebutuhan chatbot yang akan digunakan sebagai layanan informasi Kabupaten Sleman.
+
+[92] STYLE=Normal
+     TEXT=Menentukan platform AI Chatbot yang akan dievaluasi.
+
+[93] STYLE=Normal
+     TEXT=Melakukan instalasi setiap platform pada lingkungan lokal (self-hosted).
+
+[94] STYLE=Normal
+     TEXT=Melakukan konfigurasi model AI, knowledge base, dan fitur pendukung lainnya.
+
+[95] STYLE=Normal
+     TEXT=Menguji setiap platform menggunakan skenario pengujian yang sama.
+
+[96] STYLE=Normal
+     TEXT=Membandingkan hasil pengujian berdasarkan kriteria evaluasi.
+
+[97] STYLE=Normal
+     TEXT=Menyusun rekomendasi platform yang paling sesuai dengan kebutuhan instansi.
+
+[99] STYLE=Normal
+     TEXT=Platform yang Dievaluasi
+
+[104] STYLE=Normal
+     TEXT=Pada kegiatan magang ini dilakukan evaluasi terhadap lima platform AI Chatbot yang memiliki karakteristik berbeda. Platform yang digunakan sebagai objek kajian adalah sebagai berikut.
+
+[106] STYLE=Normal
+     TEXT=Kriteria Evaluasi
+
+[107] STYLE=List Paragraph
+     TEXT=Evaluasi setiap platform dilakukan menggunakan lima kriteria utama yang disusun berdasarkan kebutuhan implementasi chatbot pada website Pemerintah Kabupaten Sleman.
+
+[109] STYLE=Normal
+     TEXT=Teknik Analisis Data
+
+[110] STYLE=Normal
+     TEXT=Data hasil pengujian dianalisis menggunakan metode analisis deskriptif komparatif. Setiap platform dibandingkan berdasarkan kemampuan dalam memenuhi kriteria evaluasi yang telah ditentukan. Hasil analisis disajikan dalam bentuk uraian, tabel perbandingan, serta pembahasan mengenai kelebihan dan kekurangan masing-masing platform.
+
+[111] STYLE=Normal
+     TEXT=Melalui teknik analisis ini diperoleh gambaran mengenai platform yang paling sesuai untuk mendukung pengembangan AI Chatbot sebagai layanan informasi digital di Dinas Komunikasi dan Informatika Kabupaten Sleman.
+
+[118] STYLE=Normal
+     TEXT=DAFTAR PUSTAKA
+
+[119] STYLE=Bibliography
+     TEXT=Daftar Pustaka dibuat mengikuti standar APA. Gunakan reference manager seperti Zootero, Mendeley, atau Reference Manager pada MS Word untuk mempermudah pembuatan daftar pustaka
+
+[120] STYLE=Bibliography
+     TEXT=Contoh:
+
+[121] STYLE=Bibliography
+     TEXT=Adam, E., & Rollings, A. (2006). Fundamentals of Game Design. California: Prentice Hall.
+
+[122] STYLE=Bibliography
+     TEXT=MoD. (2013). Wikimedia. Retrieved April 19, 2016, from https://commons.wikimedia.org/wiki/File:Computer_Keyboard_MOD_45155531.jpg
+
+[123] STYLE=Bibliography
+     TEXT=Tang, S., & Hanneghan, M. (2011). Game Content Model: An Ontology for Documenting Serious. Liverpool: Liverpool John Moores University.
+
+[124] STYLE=Bibliography
+     TEXT=Tashia. (2017, Maret 16). https://aptika.kominfo.go.id. Retrieved Juli 23, 2020, from https://aptika.kominfo.go.id/2017/03/evolusi-dan-klasifikasi-permainan-elektronik-di-indonesia/
+
+[125] STYLE=Bibliography
+     TEXT=Wahyudi, R. (2012, Oktober 2). Manisnya Bisnis Game Digital di Indonesia. Retrieved from Kompas: http://tekno.kompas.com/read/2012/10/02/16084725/Manisnya.Bisnis.Game.Digital.di.Indonesia
+
+[126] STYLE=Bibliography
+     TEXT=Zhou, Z., & Wu, L. (2012). The Study Of Principles Of Puzzle Game Design. International Symposium On Information Technology In Medicine And Education, 1.
+
+[128] STYLE=Normal
+     TEXT=LAMPIRAN
+
+[130] STYLE=Normal
+     TEXT=Lampiran bersifat opsional bergantung hasil kesepakatan dengan Dosen Pembimbing Capstone. Lampiran dapat berupa:
+
+[131] STYLE=Normal
+     TEXT=Bukti pelaksanaan pengambilan data seperti pertanyaan kuesioner, resume jawaban responden, dan dokumentasi pengambilan data
+
+[132] STYLE=Normal
+     TEXT=Tabel yang terlalu panjang yang masih diperlukan tetapi tidak memungkinkan untuk ditayangkan di bagian utama skripsi.
+
+[133] STYLE=Normal
+     TEXT=Gambar-gambar pendukung yang tidak terlalu penting untuk ditampilkan di bagian utama. Akan tetapi, dapat mendukung dalam memberikan argumentasi/pengamatan/analisis
+
+
+=== TOTAL paragraphs: 90 ===
+
+=== TABLES ===
+
+Table 0: 2 rows x 2 cols
+  Row 0: ['Putra Nugroho', '20230140165']
+  Row 1: ['Hikmatyar Alghifary', '20230140193']
+
+Table 1: 7 rows x 2 cols
+  Row 0: ['C', '']
+  Row 1: ['Challenge', 'Bagian gameplay yang menjelaskan tantangan atau halangan apa saja yang terdapat ']
+  Row 2: ['Construct2', 'Tools pembuat game yang dibuat oleh Scirra berbasis HTML5 untuk platform 2D']
+  Row 3: ['G', '']
+  Row 4: ['Game', 'Aktifitas bermain yang dilakukan dalam konteks berpura-pura namun terlihat seper']
+  Row 5: ['Game Asset', 'Elemen-elemen penyusun game seperti art (gambar), sound (musik), program (behavi']
+  Row 6: ['Game Design', 'Proses mengimajinasikan suatu ide game, mendefinisikan bagaimana suatu game beke']
+
+Table 2: 6 rows x 3 cols
+  Row 0: ['No', 'Platform', 'Fungsi Utama']
+  Row 1: ['1', 'Flowise', 'Platform visual untuk membangun AI Agent berbasis node.']
+  Row 2: ['2', 'Dify', 'Platform pengembangan aplikasi AI dengan workflow visual dan knowledge base.']
+  Row 3: ['3', 'Open WebUI', 'Antarmuka AI berbasis web untuk model LLM lokal.']
+  Row 4: ['4', 'RAGFlow', 'Platform RAG enterprise dengan kemampuan pengelolaan knowledge base.']
+  Row 5: ['5', 'NyAI & Support Board', 'Platform chatbot customer service dengan integrasi AI.']
+
+Table 3: 6 rows x 2 cols
+  Row 0: ['Kriteria', 'Deskripsi']
+  Row 1: ['Self-hosted', 'Platform dapat dijalankan pada server lokal tanpa ketergantungan layanan cloud.']
+  Row 2: ['Agentic Workflow', 'Mendukung pembuatan AI Agent yang mampu menjalankan proses secara otomatis.']
+  Row 3: ['Multi-Agent & Knowledge Isolation', 'Mendukung beberapa chatbot dengan basis pengetahuan yang terpisah.']
+  Row 4: ['Embeddable', 'Dapat diintegrasikan ke dalam website melalui widget, iframe, atau API.']
+  Row 5: ['Production Ready', 'Memiliki stabilitas dan fitur yang mendukung implementasi pada lingkungan produk']
+

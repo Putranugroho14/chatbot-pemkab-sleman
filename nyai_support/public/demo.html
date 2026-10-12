@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Resmi Pemerintah Kabupaten Sleman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #064e3b;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    /* Top Bar */
+    .topbar {
+      background: var(--primary-dark);
+      color: #e2e8f0;
+      font-size: 13px;
+      padding: 8px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .topbar-right a {
+      color: #a7f3d0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    /* Navigation */
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(4, 120, 87, 0.25);
+    }
+    .brand-text h1 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--primary-dark);
+    }
+    .brand-text p {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #334155;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .btn-admin {
+      background: #ecfdf5;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-admin:hover {
+      background: var(--primary);
+      color: white;
+    }
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
+      color: white;
+      padding: 80px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to top, var(--bg), transparent);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h2 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 32px;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .btn-hero-chat {
+      background: #f59e0b;
+      color: #0f172a;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.5);
+      transition: all 0.2s;
+    }
+    .btn-hero-chat:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.6);
+    }
+    /* Services Section */
+    .section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      border-color: #a7f3d0;
+    }
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .service-btn {
+      color: var(--primary);
+      background: none;
+      border: none;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+    }
+    .service-btn:hover {
+      text-decoration: underline;
+    }
+    /* Embed Notice Banner */
+    .embed-banner {
+      background: #eff6ff;
+      border: 1.5px dashed #3b82f6;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .embed-banner h4 {
+      color: #1e40af;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .embed-banner p {
+      font-size: 13px;
+      color: #3b82f6;
+    }
+    .code-pill {
+      background: #1e293b;
+      color: #38bdf8;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🏛️ Portal Resmi Pemerintah Daerah Kabupaten Sleman</span>
+      <span>•</span>
+      <span>Layanan Digital Terpadu 24/7</span>
+    </div>
+    <div class="topbar-right">
+      <a href="/">Masuk ke S-Bot Admin & Console Agentic AI ➔</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/demo" class="brand">
+      <div class="brand-logo">S</div>
+      <div class="brand-text">
+        <h1>KABUPATEN SLEMAN</h1>
+        <p>Rumah Bersama yang Cerdas & Berdaya Saing</p>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#layanan">Layanan Publik</a>
+      <a href="#pariwisata">Pariwisata</a>
+      <a href="#pengaduan">Aspirasi Warga</a>
+      <a href="/" class="btn-admin">⚙️ Panel Admin S-Bot</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-badge">
+      <span>✨ Didukung Teknologi S-Bot Agentic AI & RAGFlow Sleman</span>
+    </div>
+    <h2>Layanan Publik Cerdas Tanpa Antri di Kabupaten Sleman</h2>
+    <p>Konsultasikan persyaratan KTP, reservasi wisata lereng Merapi, hingga pengaduan fasilitas secara otomatis melalui asisten AI terpadu.</p>
+    <div class="hero-actions">
+      <button class="btn-hero-chat" onclick="window.NyaiWidget && window.NyaiWidget.open()">
+        <span>💬 Tanya Asisten Virtual AI</span>
+      </button>
+      <a href="/" class="btn-admin" style="padding: 14px 24px; font-size: 15px; background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.4);">
+        Buka Console & Debugger
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section" id="layanan">
+    <!-- Embed Notice Box -->
+    <div class="embed-banner">
+      <div>
+        <h4>💡 Demonstrasi Standalone Floating Widget Terpasang</h4>
+        <p>Widget mengambang di pojok kanan bawah dimuat melalui satu baris script embed resmi S-Bot:</p>
+      </div>
+      <div class="code-pill">
+        &lt;script src="/widget/dist/sbot-widget.js"&gt;&lt;/script&gt;
+      </div>
+    </div>
+
+    <div class="section-title">
+      <span>Layanan Unggulan Instansi</span>
+    </div>
+
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card">
+        <div class="service-icon" style="background: #ecfdf5; color: #059669;">🪪</div>
+        <h3>Dinas Kependudukan & Pencatatan Sipil</h3>
+        <p>Pengurusan KTP-el baru pemula, penerbitan Kartu Keluarga (KK), KIA, serta Akta Kelahiran/Kematian secara mandiri.</p>
+        <button class="service-btn" onclick="openDukcapilAgent()">
+          <span>Konsultasi Syarat KTP / KK ➔</span>
+        </button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card">
+        <div class="service-icon" style="background: #fffbeb; color: #d97706;">🌋</div>
+        <h3>Dinas Pariwisata Sleman</h3>
+        <p>Eksplorasi destinasi Candi Prambanan, petualangan Jeep Merapi Lava Tour, desa wisata Kaliurang, dan event budaya.</p>
+        <button class="service-btn" onclick="openWisataAgent()">
+          <span>Reservasi Destinasi Wisata ➔</span>
+        </button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card">
+        <div class="service-icon" style="background: #eff6ff; color: #2563eb;">📡</div>
+        <h3>Diskominfo & Pengaduan Warga</h3>
+        <p>Kanal aspirasi cepat, pelaporan kendala jaringan Wifi Padukuhan gratis, dan keluhan infrastruktur pelayanan publik.</p>
+        <button class="service-btn" onclick="openPengaduanAgent()">
+          <span>Buat Tiket Aduan Online ➔</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Embed Standalone Widget Script (S-Bot Standard) -->
+  <script src="/widget/dist/sbot-widget.js"></script>
+
+  <script>
+    const widget = window.SBotWidget || window.NyaiWidget;
+    function openDukcapilAgent() {
+      if (window.NyaiWidget) {
+        window.NyaiWidget.open();
+        window.NyaiWidget.send('Saya mau urus KTP baru');
+      }
+    }
+    function openWisataAgent() {
+      if (window.NyaiWidget) {
+        window.NyaiWidget.open();
+        window.NyaiWidget.send('Rekomendasi wisata Merapi Lava Tour');
+      }
+    }
+    function openPengaduanAgent() {
+      if (window.NyaiWidget) {
+        window.NyaiWidget.open();
+        window.NyaiWidget.send('Lapor aduan warga');
+      }
+    }
+  </script>
+
+</body>
+</html>

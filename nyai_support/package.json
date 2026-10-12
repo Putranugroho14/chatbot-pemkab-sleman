@@ -1,0 +1,23 @@
+{
+  "name": "s-bot",
+  "version": "1.0.0",
+  "description": "S-Bot Agentic AI Platform & Embedded Support Widget for Pemkab Sleman",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "nyai",
+    "support-board",
+    "agentic-ai",
+    "ragflow",
+    "sleman"
+  ],
+  "author": "",
+  "license": "ISC"
+}

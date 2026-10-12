@@ -1,0 +1,88 @@
+# ===================================
+# FOLDER BESAR - REPOSITORI PIHAK KETIGA
+# ===================================
+# Folder ini adalah clone dari repo lain dan sangat besar (GB)
+dify/
+ragflow/
+flowise_d_drive/
+langgraph_eksperimen/
+
+# ===================================
+# DEPENDENSI (Install Ulang di Laptop Teman)
+# ===================================
+# Node.js dependencies
+node_modules/
+.npm-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# PHP/Laravel dependencies
+vendor/
+
+# Python virtual environment
+venv/
+env/
+ENV/
+*.pyc
+__pycache__/
+
+# ===================================
+# FILE KREDENSIAL & RAHASIA
+# ===================================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# ===================================
+# FILE LOG & CACHE
+# ===================================
+*.log
+error.log
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+
+# ===================================
+# FILE SISTEM OPERASI
+# ===================================
+# Windows
+Thumbs.db
+Desktop.ini
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ===================================
+# IDE & EDITOR
+# ===================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+
+# ===================================
+# BUILD & TEMPORARY FILES
+# ===================================
+dist/
+build/
+*.tmp
+*.temp
+
+# ===================================
+# DATABASE
+# ===================================
+*.sqlite
+*.sqlite3
+*.db
