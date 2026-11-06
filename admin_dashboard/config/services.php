@@ -8,9 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This file is for storing the credentials for third party services such
-    | as Mailgun, Postmark, AWS and more. This file provides the de facto
-    | location for this type of information, allowing packages to have
-    | a conventional file to locate the various service credentials.
+    | as Mailgun, Postmark, AWS, RAGFlow and more.
     |
     */
 
@@ -34,5 +32,15 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+
+    'ragflow' => [
+        'api_url' => env('RAGFLOW_API_URL', 'http://localhost:9380/api/v1'),
+        'api_token' => env('RAGFLOW_API_TOKEN', ''),
+        'agent_kominfo' => env('RAGFLOW_AGENT_KOMINFO', 'agent_kominfo_id_01'),
+        'agent_pariwisata' => env('RAGFLOW_AGENT_PARIWISATA', 'agent_pariwisata_id_02'),
+        'agent_dukcapil' => env('RAGFLOW_AGENT_DUKCAPIL', 'agent_dukcapil_id_03'),
+    ],
+
+    'sbot_api_url' => env('SBOT_API_URL', 'http://localhost:3000'),
 
 ];

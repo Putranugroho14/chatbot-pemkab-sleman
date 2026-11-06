@@ -3,229 +3,175 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Models\ChatHistory;
+use App\Services\RAGFlowService;
 
 class ChatbotController extends Controller
 {
-    /**
-     * Menampilkan halaman chatbot simulator + statistik dari database lokal.
-     */
-    public function index()
+    protected RAGFlowService $ragflow;
+
+    public function __construct(RAGFlowService $ragflow)
     {
-        $documents = [];
-        $datasetApiKey = env('DIFY_DATASET_API_KEY');
-        $difyApiUrl = env('DIFY_API_URL', 'http://localhost/v1');
-        $datasetId = '124cca7a-39a4-4f05-8094-a969370e3a0d'; // ID Dataset Dukcapil
+        $this->ragflow = $ragflow;
+    }
 
-        if ($datasetApiKey) {
-            try {
-                $response = Http::withHeaders([
-                    'Authorization' => 'Bearer ' . $datasetApiKey,
-                ])->timeout(10)->get("$difyApiUrl/datasets/$datasetId/documents");
+    /**
+     * Menampilkan halaman chatbot simulator + statistik terfilter per dinas/role.
+     */
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $selectedDinas = $request->query('dinas');
 
-                if ($response->successful()) {
-                    $documents = $response->json('data') ?? [];
-                }
-            } catch (\Exception $e) {
-                Log::error('Dify Fetch Documents Error: ' . $e->getMessage());
-            }
+        // Jika bukan super admin, paksa dinas sesuai akun user
+        if (!$user->isSuperAdmin()) {
+            $selectedDinas = $user->dinas ?? 'dukcapil';
+        } else {
+            $selectedDinas = $selectedDinas ?: 'dukcapil';
         }
 
-        // Ambil statistik nyata dari database lokal MySQL
-        $totalChat      = ChatHistory::whereMonth('created_at', now()->month)->count();
-        $totalChatWeek  = ChatHistory::where('created_at', '>=', now()->startOfWeek())->count();
-        $totalChatAll   = ChatHistory::count();
+        // Query riwayat chat berdasarkan hak akses
+        $chatQuery = ChatHistory::query();
+        if (!$user->isSuperAdmin()) {
+            $chatQuery->where('dinas', $selectedDinas);
+        } elseif ($request->filled('dinas')) {
+            $chatQuery->where('dinas', $selectedDinas);
+        }
 
-        return view('chatbot', compact('documents', 'totalChat', 'totalChatWeek', 'totalChatAll'));
+        $totalChat = (clone $chatQuery)->whereMonth('created_at', now()->month)->count();
+        $totalChatWeek = (clone $chatQuery)->where('created_at', '>=', now()->startOfWeek())->count();
+        $totalChatAll = (clone $chatQuery)->count();
+
+        // Daftar dokumen lokal simulasi
+        $documents = [
+            ['name' => 'SOP Layanan Kependudukan Sleman.pdf', 'status' => 'Indexed', 'size' => '2.4 MB'],
+            ['name' => 'Buku Panduan Wisata Kaliurang & Merapi.pdf', 'status' => 'Indexed', 'size' => '5.1 MB'],
+            ['name' => 'Tata Kelola Jaringan Wifi Padukuhan Kominfo.pdf', 'status' => 'Indexed', 'size' => '1.8 MB'],
+        ];
+
+        return view('chatbot', compact('documents', 'totalChat', 'totalChatWeek', 'totalChatAll', 'selectedDinas', 'user'));
     }
 
     /**
-     * Menampilkan halaman tabel riwayat percakapan.
+     * Menampilkan halaman tabel riwayat percakapan dengan isolasi tenant.
      */
-    public function history()
+    public function history(Request $request)
     {
-        // Mengambil riwayat percakapan, diurutkan dari yang terbaru, 15 baris per halaman
-        $histories = ChatHistory::orderBy('created_at', 'desc')->paginate(15);
-        return view('chat-history', compact('histories'));
+        $user = $request->user();
+        $query = ChatHistory::with('user')->orderBy('created_at', 'desc');
+
+        // Isolasi riwayat: Dinas admin & staff hanya melihat chat dinasnya
+        if (!$user->isSuperAdmin()) {
+            $query->where('dinas', $user->dinas);
+        } elseif ($request->filled('dinas')) {
+            $query->where('dinas', $request->query('dinas'));
+        }
+
+        $histories = $query->paginate(15);
+        $activeDinas = $user->isSuperAdmin() ? $request->query('dinas', 'Semua Dinas') : $user->dinas;
+
+        return view('chat-history', compact('histories', 'activeDinas', 'user'));
     }
 
     /**
-     * Menerima request dari frontend, mengirim ke Dify API,
-     * menyimpan percakapan ke MySQL, dan mengembalikan respons.
+     * Menerima request dari frontend, memverifikasi izin dinas,
+     * mengirim ke RAGFlow/Agent AI Engine, dan mencatat ke database.
      */
     public function chat(Request $request)
     {
         $request->validate([
-            'message'         => 'required|string|max:2000',
-            'lokasi_dinas'    => 'required|string',
+            'message' => 'required|string|max:2000',
+            'lokasi_dinas' => 'nullable|string',
+            'dinas' => 'nullable|string|in:kominfo,pariwisata,dukcapil',
             'conversation_id' => 'nullable|string'
         ]);
 
-        $difyApiUrl = env('DIFY_API_URL', 'http://localhost/v1');
-
-        // LOGIKA MULTI-AGENT: Tentukan API Key berdasarkan lokasi dinas
-        $dinasTujuan = strtolower($request->lokasi_dinas);
-        $difyApiKey = null;
+        $user = $request->user();
         
-        if (str_contains($dinasTujuan, 'pariwisata')) {
-            $difyApiKey = env('DIFY_API_KEY_PARIWISATA'); // Harus ditambahkan di .env nanti
-        } else {
-            // Default ke Dukcapil
-            $difyApiKey = env('DIFY_API_KEY'); 
+        // Tentukan target dinas
+        $targetDinas = $request->input('dinas');
+        if (!$targetDinas && $request->filled('lokasi_dinas')) {
+            $raw = strtolower($request->lokasi_dinas);
+            if (str_contains($raw, 'wisata') || str_contains($raw, 'pariwisata')) {
+                $targetDinas = 'pariwisata';
+            } elseif (str_contains($raw, 'kominfo')) {
+                $targetDinas = 'kominfo';
+            } else {
+                $targetDinas = 'dukcapil';
+            }
         }
+        $targetDinas = $targetDinas ?: ($user->dinas ?: 'dukcapil');
 
-        if (!$difyApiKey) {
+        // Verifikasi hak akses multi-tenant
+        if (!$user->canAccessDinas($targetDinas)) {
             return response()->json([
-                'error' => 'DIFY_API_KEY untuk dinas tersebut belum diatur di file .env'
-            ], 500);
+                'error' => 'Akses ditolak: Anda tidak memiliki hak akses untuk dinas ' . $targetDinas
+            ], 403);
         }
-
-        // Gunakan session ID sebagai identifier user (Multi-user identifier)
-        $userId = session()->getId();
 
         try {
-            $payload = [
-                'inputs' => [
-                    'lokasi_dinas' => $request->lokasi_dinas,
-                ],
-                'query'         => $request->message,
-                'response_mode' => 'streaming',
-                'user'          => $userId
-            ];
+            $response = $this->ragflow->chat(
+                $targetDinas,
+                $request->message,
+                $request->conversation_id,
+                $user->id
+            );
 
-            if ($request->filled('conversation_id')) {
-                $payload['conversation_id'] = $request->conversation_id;
-            }
+            // Simpan ke riwayat database
+            ChatHistory::create([
+                'user_id' => $user->id,
+                'session_id' => session()->getId() ?: 'sess_' . uniqid(),
+                'conversation_id' => $response['conversation_id'] ?? null,
+                'dinas' => $targetDinas,
+                'question' => $request->message,
+                'answer' => $response['answer'],
+                'ip_address' => $request->ip(),
+            ]);
 
-            // Memanggil API Dify
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $difyApiKey,
-                'Content-Type'  => 'application/json'
-            ])->timeout(60)->post($difyApiUrl . '/chat-messages', $payload);
-
-            if ($response->successful()) {
-                // Parse respons SSE streaming dari Agent
-                $body        = $response->body();
-                $lines       = explode("\n", $body);
-                $finalAnswer = '';
-                $convoId     = null;
-
-                foreach ($lines as $line) {
-                    if (strpos($line, 'data: ') === 0) {
-                        $json = json_decode(substr($line, 6), true);
-                        if (isset($json['event'])) {
-                            if ($json['event'] === 'message' || $json['event'] === 'agent_message') {
-                                $finalAnswer .= $json['answer'] ?? '';
-                            }
-                            if (isset($json['conversation_id'])) {
-                                $convoId = $json['conversation_id'];
-                            }
-                        }
-                    }
-                }
-
-                // Bersihkan tag <think>...</think> bawaan model reasoning
-                $finalAnswer = preg_replace('/<think>.*?<\/think>\s*/s', '', $finalAnswer);
-                $finalAnswer = trim($finalAnswer);
-
-                $answerToSave = $finalAnswer ?: 'Tidak ada jawaban dari AI.';
-
-                // ==========================================
-                // SIMPAN PERCAKAPAN KE DATABASE LOKAL MYSQL
-                // ==========================================
-                ChatHistory::create([
-                    'session_id'  => $userId,
-                    'dinas'       => $request->lokasi_dinas,
-                    'question'    => $request->message,
-                    'answer'      => $answerToSave,
-                    'ip_address'  => $request->ip(),
-                ]);
-
-                return response()->json([
-                    'answer'          => $answerToSave,
-                    'conversation_id' => $convoId
-                ]);
-
-            } else {
-                Log::error('Dify API Error: ' . $response->body());
-                return response()->json([
-                    'error' => 'Gagal terhubung ke AI. Silakan coba lagi.'
-                ], $response->status());
-            }
+            return response()->json([
+                'answer' => $response['answer'],
+                'conversation_id' => $response['conversation_id'],
+                'dinas' => $targetDinas,
+                'source' => $response['source'] ?? 'ai_engine',
+            ]);
 
         } catch (\Exception $e) {
-            Log::error('Dify Connection Exception: ' . $e->getMessage());
+            Log::error('Chatbot Controller Error: ' . $e->getMessage());
             return response()->json([
-                'error' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+                'error' => 'Gagal memproses pesan: ' . $e->getMessage()
             ], 500);
         }
     }
 
     /**
-     * Menerima file dari user dan menguploadnya ke Knowledge Base Dify.
+     * Upload dokumen pengetahuan baru ke dinas terkait.
      */
     public function upload(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:pdf,txt,doc,docx,csv|max:10240',
+            'nama_dokumen' => 'required|string|max:255',
+            'file_dokumen' => 'required|file|mimes:pdf,txt|max:10240',
+            'dinas' => 'nullable|string|in:kominfo,pariwisata,dukcapil',
         ]);
 
-        $datasetApiKey = env('DIFY_DATASET_API_KEY');
-        $difyApiUrl    = env('DIFY_API_URL', 'http://localhost/v1');
-        $datasetId     = '124cca7a-39a4-4f05-8094-a969370e3a0d';
+        $user = $request->user();
+        $targetDinas = $request->input('dinas') ?: ($user->dinas ?: 'dukcapil');
 
-        if (!$datasetApiKey) {
+        if (!$user->canManageAgent($targetDinas)) {
             return response()->json([
-                'error' => 'DIFY_DATASET_API_KEY belum diatur di file .env'
-            ], 500);
+                'error' => 'Akses ditolak: Anda tidak memiliki hak kelola dokumen untuk dinas ini.'
+            ], 403);
         }
 
-        try {
-            $file = $request->file('file');
+        $file = $request->file('file_dokumen');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('knowledge_base/' . $targetDinas, $fileName, 'local');
 
-            $data = json_encode([
-                "indexing_technique" => "high_quality",
-                "process_rule" => [
-                    "rules" => [
-                        "pre_processing_rules" => [
-                            ["id" => "remove_extra_spaces", "enabled" => true],
-                            ["id" => "remove_urls_emails",  "enabled" => false]
-                        ],
-                        "segmentation" => [
-                            "separator"  => "\n",
-                            "max_tokens" => 500
-                        ]
-                    ],
-                    "mode" => "custom"
-                ]
-            ]);
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $datasetApiKey,
-            ])->timeout(120)->attach(
-                'file', file_get_contents($file->path()), $file->getClientOriginalName()
-            )->post("$difyApiUrl/datasets/$datasetId/document/create_by_file", [
-                'data' => $data
-            ]);
-
-            if ($response->successful()) {
-                return response()->json([
-                    'success' => 'Dokumen berhasil di-upload dan sedang dipelajari oleh AI!'
-                ]);
-            } else {
-                Log::error('Dify Upload Error: ' . $response->body());
-                return response()->json([
-                    'error' => 'Gagal mengupload dokumen ke Dify.'
-                ], 400);
-            }
-
-        } catch (\Exception $e) {
-            Log::error('Dify Upload Exception: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
-            ], 500);
-        }
+        return response()->json([
+            'success' => true,
+            'message' => "Dokumen '{$request->nama_dokumen}' berhasil diunggah ke Knowledge Base {$targetDinas}.",
+            'file' => $fileName
+        ]);
     }
 }

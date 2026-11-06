@@ -1,31 +1,72 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ route('dashboard') }}" class="font-bold text-lg text-indigo-700 flex items-center gap-2">
+                        <span class="text-2xl">🤖</span>
+                        <span>S-Bot Sleman</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <div class="hidden space-x-6 sm:-my-px sm:ms-8 sm:flex items-center text-sm">
+                    @if(Auth::user()->isSuperAdmin())
+                        <x-nav-link :href="route('superadmin.dashboard')" :active="request()->routeIs('superadmin.dashboard')">
+                            {{ __('Dashboard Super') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('superadmin.users.index')" :active="request()->routeIs('superadmin.users.*')">
+                            {{ __('Kelola Pengguna') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('superadmin.agents')" :active="request()->routeIs('superadmin.agents')">
+                            {{ __('Status AI Agents') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('superadmin.chat-history')" :active="request()->routeIs('superadmin.chat-history')">
+                            {{ __('Semua Riwayat') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('superadmin.analytics')" :active="request()->routeIs('superadmin.analytics')">
+                            {{ __('Analitik') }}
+                        </x-nav-link>
+                    @elseif(Auth::user()->isDinasAdmin())
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Dashboard Dinas') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.staff')" :active="request()->routeIs('admin.staff')">
+                            {{ __('Staff Dinas') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.chat-history')" :active="request()->routeIs('admin.chat-history')">
+                            {{ __('Riwayat Dinas') }}
+                        </x-nav-link>
+                    @endif
+
+                    <!-- Akses Chatbot Simulator -->
                     <x-nav-link :href="route('chatbot.index')" :active="request()->routeIs('chatbot.index')">
-                        {{ __('Manajemen Chatbot') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('chatbot.history')" :active="request()->routeIs('chatbot.history')">
-                        {{ __('Riwayat Percakapan') }}
+                        {{ __('Chatbot Simulator') }}
                     </x-nav-link>
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Role Badge & Settings Dropdown -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-3">
+                <!-- Badge Role & Dinas -->
+                <div class="flex items-center gap-2 text-xs">
+                    @if(Auth::user()->isSuperAdmin())
+                        <span class="bg-purple-100 text-purple-800 font-semibold px-2.5 py-1 rounded-full border border-purple-200">
+                            🛡️ Super Admin (Diskominfo)
+                        </span>
+                    @elseif(Auth::user()->isDinasAdmin())
+                        <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full border border-blue-200">
+                            🏢 Admin {{ strtoupper(Auth::user()->dinas) }}
+                        </span>
+                    @else
+                        <span class="bg-gray-100 text-gray-800 font-semibold px-2.5 py-1 rounded-full border border-gray-200">
+                            👤 Staff {{ strtoupper(Auth::user()->dinas ?? 'Umum') }}
+                        </span>
+                    @endif
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -72,15 +113,28 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+        <div class="pt-2 pb-3 space-x-0 space-y-1">
+            @if(Auth::user()->isSuperAdmin())
+                <x-responsive-nav-link :href="route('superadmin.dashboard')" :active="request()->routeIs('superadmin.dashboard')">
+                    {{ __('Dashboard Super') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('superadmin.users.index')" :active="request()->routeIs('superadmin.users.*')">
+                    {{ __('Kelola Pengguna') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('superadmin.agents')" :active="request()->routeIs('superadmin.agents')">
+                    {{ __('Status AI Agents') }}
+                </x-responsive-nav-link>
+            @elseif(Auth::user()->isDinasAdmin())
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Dashboard Dinas') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.staff')" :active="request()->routeIs('admin.staff')">
+                    {{ __('Staff Dinas') }}
+                </x-responsive-nav-link>
+            @endif
+
             <x-responsive-nav-link :href="route('chatbot.index')" :active="request()->routeIs('chatbot.index')">
-                {{ __('Manajemen Chatbot') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('chatbot.history')" :active="request()->routeIs('chatbot.history')">
-                {{ __('Riwayat Percakapan') }}
+                {{ __('Chatbot Simulator') }}
             </x-responsive-nav-link>
         </div>
 

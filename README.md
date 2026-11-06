@@ -112,10 +112,30 @@ Edit file `.env` di `nyai_support` sesuai kebutuhan (API keys, database config, 
 
 ```bash
 cd admin_dashboard
+
+# Jalankan migrasi dan seeder akun
+php artisan migrate
+php artisan db:seed
+
+# Jalankan server
 php artisan serve
 ```
 
 Dashboard akan berjalan di: `http://localhost:8000`
+
+#### 🔑 Akun Default Tersedia (Seeders):
+| Peran (Role) | Dinas Terikat | Email Login | Password |
+|---|---|---|---|
+| **Super Admin** | IT Diskominfo (Semua) | `superadmin@slemankab.go.id` | `SuperAdmin123!` |
+| **Dinas Admin** | Dukcapil | `admin.dukcapil@slemankab.go.id` | `AdminDukcapil123!` |
+| **Dinas Admin** | Pariwisata | `admin.pariwisata@slemankab.go.id` | `AdminPariwisata123!` |
+| **Dinas Admin** | Kominfo | `admin.kominfo@slemankab.go.id` | `AdminKominfo123!` |
+| **Staff** | Dukcapil / Pariwisata / Kominfo | `staff.[dinas]@slemankab.go.id` | `Staff[Dinas]123!` |
+
+#### 🌐 URL Akses Widget Publik:
+- **Dukcapil Widget:** `http://localhost:8000/embed/dukcapil`
+- **Pariwisata Widget:** `http://localhost:8000/embed/pariwisata`
+- **Kominfo Widget:** `http://localhost:8000/embed/kominfo`
 
 ### Jalankan Nyai Support Widget (Node.js)
 

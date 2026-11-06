@@ -1,43 +1,53 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Pusat Komando AI (Dukcapil Sleman)') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center gap-2">
+                <span>🤖</span> {{ __('Simulator AI Chatbot & Manajemen Knowledge Base') }}
+            </h2>
+            <div class="text-xs">
+                @if(Auth::user()->isSuperAdmin())
+                    <span class="px-3 py-1 bg-purple-100 text-purple-800 font-semibold rounded-full border border-purple-200">
+                        🛡️ Mode Super Admin (Bebas Memilih Dinas)
+                    </span>
+                @else
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold rounded-full border border-blue-200">
+                        🏢 Terisolasi ke Dinas: {{ strtoupper(Auth::user()->dinas ?? 'Umum') }}
+                    </span>
+                @endif
+            </div>
+        </div>
     </x-slot>
 
-    <div class="py-12 bg-gray-50">
+    <div class="py-8 bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
             <!-- Statistik Card -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Card 1 -->
-                <div class="bg-white rounded-lg shadow-sm p-6 border-l-4 border-indigo-500">
-                    <h4 class="text-sm font-medium text-gray-500">Total Percakapan (Bulan Ini)</h4>
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
+                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Percakapan (Bulan Ini)</h4>
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($totalChat) }}</p>
-                    <span class="text-green-500 text-sm font-medium">↑ {{ $totalChatWeek }} percakapan minggu ini</span>
+                    <span class="text-green-600 text-xs font-semibold">↑ {{ $totalChatWeek }} percakapan minggu ini</span>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-white rounded-lg shadow-sm p-6 border-l-4 border-green-500">
-                    <h4 class="text-sm font-medium text-gray-500">Dokumen Aktif (Knowledge Base)</h4>
-                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ count($documents) }}</p>
-                    <span class="text-gray-500 text-sm font-medium truncate block">
-                        @if(count($documents) > 0)
-                            {{ collect($documents)->take(2)->pluck('name')->join(', ') }}...
-                        @else
-                            Belum ada dokumen
-                        @endif
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500">
+                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Dokumen Knowledge Base</h4>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ count($documents) }} Dokumen</p>
+                    <span class="text-gray-500 text-xs truncate block mt-1">
+                        Dukcapil, Pariwisata, Diskominfo Sleman
                     </span>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-white rounded-lg shadow-sm p-6 border-l-4 border-blue-500">
-                    <h4 class="text-sm font-medium text-gray-500">Status API Dify</h4>
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
+                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Status AI Engine</h4>
                     <div class="flex items-center mt-2">
-                        <span class="relative flex h-4 w-4 mr-2">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-4 w-4 bg-blue-500"></span>
+                        <span class="relative flex h-3.5 w-3.5 mr-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-green-500"></span>
                         </span>
-                        <p class="text-xl font-bold text-gray-900">Online</p>
+                        <p class="text-xl font-bold text-gray-900">Online & Terisolasi</p>
                     </div>
+                    <span class="text-gray-500 text-xs block mt-1">RAGFlow / S-Bot Local Engine</span>
                 </div>
             </div>
 
@@ -45,28 +55,44 @@
                 <!-- Kolom Kiri: Manajemen Dokumen -->
                 <div class="space-y-6">
                     <!-- Form Upload -->
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 border-b border-gray-200">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                Upload Aturan Baru
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-base font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                <span>📄</span> Upload Dokumen SOP / Regulasi Baru
                             </h3>
-                            <p class="text-sm text-gray-600 mb-6">File PDF akan otomatis dikirim ke otak AI (Dify) agar bot semakin cerdas menjawab pertanyaan warga.</p>
+                            <p class="text-xs text-gray-500 mb-4">
+                                Dokumen PDF atau TXT akan dimasukkan ke Knowledge Base dinas terkait untuk memperkaya pemahaman AI.
+                            </p>
 
                             <form id="uploadForm" class="space-y-4">
                                 @csrf
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Nama Aturan</label>
-                                    <input type="text" id="uploadName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Contoh: Peraturan Bupati No 15">
+                                    <label class="block text-xs font-semibold text-gray-700">Nama Dokumen / Aturan</label>
+                                    <input type="text" id="uploadName" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs" placeholder="Contoh: Peraturan Bupati No. 20 Tahun 2026">
                                 </div>
+
+                                @if(Auth::user()->isSuperAdmin())
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">File Dokumen (PDF/TXT)</label>
-                                    <input type="file" id="uploadFile" accept=".pdf,.txt" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                    <label class="block text-xs font-semibold text-gray-700">Target Dinas Knowledge Base</label>
+                                    <select id="uploadDinas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs">
+                                        <option value="dukcapil">Dinas Dukcapil</option>
+                                        <option value="pariwisata">Dinas Pariwisata</option>
+                                        <option value="kominfo">Diskominfo Sleman</option>
+                                    </select>
                                 </div>
-                                <!-- Tempat Notifikasi Upload -->
-                                <div id="uploadAlert" class="hidden text-sm p-3 rounded-lg"></div>
+                                @else
+                                <input type="hidden" id="uploadDinas" value="{{ Auth::user()->dinas }}">
+                                @endif
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700">File Dokumen (.PDF / .TXT)</label>
+                                    <input type="file" id="uploadFile" accept=".pdf,.txt" required class="mt-1 block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                </div>
+
+                                <div id="uploadAlert" class="hidden text-xs p-3 rounded-lg"></div>
+
                                 <div class="flex justify-end">
-                                    <button type="button" id="uploadBtn" onclick="uploadDocument()" class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="button" id="uploadBtn" onclick="uploadDocument()" class="bg-indigo-600 rounded-md py-2 px-4 text-xs font-semibold text-white hover:bg-indigo-700 transition">
                                         Upload & Latih AI
                                     </button>
                                 </div>
@@ -75,28 +101,27 @@
                     </div>
 
                     <!-- List Dokumen Aktif -->
-                    <div class="bg-white shadow-sm sm:rounded-lg">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                Database Dokumen (Aktif)
+                            <h3 class="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <span>📚</span> Knowledge Base Dokumen (Aktif)
                             </h3>
-                            <ul class="divide-y divide-gray-200">
+                            <ul class="divide-y divide-gray-100">
                                 @forelse ($documents as $doc)
-                                <li class="py-3 flex justify-between items-center">
-                                    <div class="flex items-center">
-                                        <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path></svg>
-                                        <div class="flex flex-col">
-                                            <span class="text-sm font-medium text-gray-900 truncate" style="max-width: 250px;" title="{{ $doc['name'] }}">{{ $doc['name'] }}</span>
-                                            <span class="text-xs font-semibold {{ isset($doc['indexing_status']) && $doc['indexing_status'] === 'completed' ? 'text-green-600' : 'text-yellow-600' }}">
-                                                {{ isset($doc['indexing_status']) && $doc['indexing_status'] === 'completed' ? 'Tersedia' : 'Memproses...' }}
-                                            </span>
+                                <li class="py-3 flex justify-between items-center text-xs">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-red-500 text-lg">📕</span>
+                                        <div>
+                                            <span class="font-medium text-gray-900 block" title="{{ $doc['name'] }}">{{ $doc['name'] }}</span>
+                                            <span class="text-gray-400">{{ $doc['size'] ?? 'Ukuran bervariasi' }}</span>
                                         </div>
                                     </div>
-                                    <!-- <button class="text-red-600 hover:text-red-900 text-sm font-medium px-2 py-1 bg-red-50 rounded-md">Hapus</button> -->
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700">
+                                        {{ $doc['status'] ?? 'Indexed' }}
+                                    </span>
                                 </li>
                                 @empty
-                                <li class="py-6 text-sm text-gray-500 text-center bg-gray-50 rounded-lg">Belum ada dokumen yang di-upload.</li>
+                                <li class="py-6 text-xs text-gray-400 text-center bg-gray-50 rounded-lg">Belum ada dokumen yang di-upload.</li>
                                 @endforelse
                             </ul>
                         </div>
@@ -104,37 +129,50 @@
                 </div>
 
                 <!-- Kolom Kanan: Simulator Uji Coba -->
-                <div class="bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                            Simulator Uji Coba Chatbot
-                        </h3>
-                        <p class="text-sm text-gray-600 mb-4">Tes kecerdasan chatbot di sini setelah Anda meng-upload PDF baru.</p>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
+                                <span>💬</span> Simulator Uji Coba Chatbot
+                            </h3>
+                            <button onclick="resetConversation()" class="text-xs text-gray-500 hover:text-gray-800 underline">
+                                🔄 Reset Sesi
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-4">Tes respons kecerdasan chatbot dan pastikan isolasi knowledge base dinas berjalan dengan tepat.</p>
                         
-                        <!-- Select Lokasi Dinas (Bunglon Feature) -->
+                        <!-- Select Lokasi Dinas -->
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Simulasikan Lokasi Website (Routing)</label>
-                            <select id="lokasiDinas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                <option value="dukcapil">Dinas Dukcapil</option>
-                                <option value="pariwisata">Dinas Pariwisata</option>
-                            </select>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Target Dinas yang Diuji:</label>
+                            @if(Auth::user()->isSuperAdmin())
+                                <select id="lokasiDinas" onchange="onDinasChange()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs">
+                                    <option value="dukcapil" {{ ($selectedDinas ?? '') == 'dukcapil' ? 'selected' : '' }}>Dinas Dukcapil (Kependudukan & Catatan Sipil)</option>
+                                    <option value="pariwisata" {{ ($selectedDinas ?? '') == 'pariwisata' ? 'selected' : '' }}>Dinas Pariwisata (Wisata & Destinasi)</option>
+                                    <option value="kominfo" {{ ($selectedDinas ?? '') == 'kominfo' ? 'selected' : '' }}>Diskominfo (Jaringan & Aduan Layanan)</option>
+                                </select>
+                            @else
+                                <div class="p-2.5 bg-gray-100 border border-gray-200 rounded-md text-xs font-semibold text-gray-700 flex items-center justify-between">
+                                    <span>🏢 Dinas {{ ucfirst(Auth::user()->dinas) }} (Terkunci Sesuai Akun)</span>
+                                    <span class="text-green-600">✓ Isolated</span>
+                                </div>
+                                <input type="hidden" id="lokasiDinas" value="{{ Auth::user()->dinas }}">
+                            @endif
                         </div>
                         
                         <!-- Area Chat -->
-                        <div class="border border-gray-200 rounded-lg h-96 flex flex-col bg-gray-50">
-                            <div id="chatContainer" class="flex-1 p-4 overflow-y-auto space-y-4">
+                        <div class="border border-gray-200 rounded-xl h-96 flex flex-col bg-gray-50 overflow-hidden">
+                            <div id="chatContainer" class="flex-1 p-4 overflow-y-auto space-y-3">
                                 <div class="flex justify-start">
-                                    <div class="bg-indigo-100 text-indigo-900 rounded-lg p-3 max-w-[80%] text-sm shadow-sm">
-                                        Halo! Saya asisten AI Pemkab Sleman. Silakan pilih lokasi dinas di atas, lalu tes kemampuan saya!
+                                    <div class="bg-indigo-100 text-indigo-900 rounded-xl p-3 max-w-[85%] text-xs shadow-sm">
+                                        Halo! Saya adalah Asisten Virtual Multi-Tenant Pemkab Sleman. Silakan ajukan pertanyaan untuk menguji respon saya.
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Input -->
-                            <div class="p-3 bg-white border-t border-gray-200 flex items-center">
-                                <input type="text" id="chatInput" class="flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ketik pesan untuk mengetes AI..." onkeypress="handleKeyPress(event)">
-                                <button type="button" id="sendBtn" onclick="sendMessage()" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors">
+                            <div class="p-3 bg-white border-t border-gray-200 flex items-center gap-2">
+                                <input type="text" id="chatInput" class="flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs" placeholder="Ketik pertanyaan untuk mengetes AI..." onkeypress="handleKeyPress(event)">
+                                <button type="button" id="sendBtn" onclick="sendMessage()" class="px-4 py-2 border border-transparent text-xs font-semibold rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition">
                                     Kirim
                                 </button>
                             </div>
@@ -148,29 +186,48 @@
     <!-- Script Integrasi AI Simulator -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        /* CSS tambahan agar Markdown seperti list dan bold terlihat rapi */
-        .markdown-body p { margin-bottom: 0.5rem; }
-        .markdown-body ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 0.5rem; }
-        .markdown-body ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        .markdown-body p { margin-bottom: 0.35rem; }
+        .markdown-body ul { list-style-type: disc; margin-left: 1.25rem; margin-bottom: 0.35rem; }
+        .markdown-body ol { list-style-type: decimal; margin-left: 1.25rem; margin-bottom: 0.35rem; }
         .markdown-body strong { font-weight: 700; color: #111827; }
     </style>
     <script>
         let conversationId = null;
 
-        function appendMessage(text, isUser) {
+        function resetConversation() {
+            conversationId = 'sim_' + Math.random().toString(36).substring(2, 10);
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.innerHTML = `
+                <div class="flex justify-start">
+                    <div class="bg-indigo-100 text-indigo-900 rounded-xl p-3 max-w-[85%] text-xs shadow-sm">
+                        Sesi percakapan direset. Silakan ajukan pertanyaan baru.
+                    </div>
+                </div>
+            `;
+        }
+
+        function onDinasChange() {
+            resetConversation();
+        }
+
+        function appendMessage(text, isUser, sourceBadge = null) {
             const chatContainer = document.getElementById('chatContainer');
             const wrapper = document.createElement('div');
             wrapper.className = isUser ? 'flex justify-end' : 'flex justify-start';
             
             const bubble = document.createElement('div');
             bubble.className = isUser 
-                ? 'bg-indigo-600 text-white rounded-lg p-3 max-w-[80%] text-sm shadow-sm whitespace-pre-wrap' 
-                : 'bg-white text-gray-800 border border-gray-200 rounded-lg p-3 max-w-[80%] text-sm shadow-sm markdown-body';
+                ? 'bg-indigo-600 text-white rounded-xl p-3 max-w-[85%] text-xs shadow-sm whitespace-pre-wrap' 
+                : 'bg-white text-gray-800 border border-gray-200 rounded-xl p-3 max-w-[85%] text-xs shadow-sm markdown-body';
             
             if (isUser) {
                 bubble.innerText = text;
             } else {
-                bubble.innerHTML = marked.parse(text);
+                let html = marked.parse(text);
+                if (sourceBadge) {
+                    html += `<div class="mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-400">Sumber: ${sourceBadge}</div>`;
+                }
+                bubble.innerHTML = html;
             }
             
             wrapper.appendChild(bubble);
@@ -191,9 +248,9 @@
             wrapper.className = 'flex justify-start mb-2';
             
             const bubble = document.createElement('div');
-            bubble.className = 'bg-white text-gray-500 border border-gray-200 rounded-full px-4 py-2 text-sm shadow-sm flex items-center space-x-2';
+            bubble.className = 'bg-white text-gray-500 border border-gray-200 rounded-full px-3 py-1.5 text-xs shadow-sm flex items-center space-x-2';
             bubble.innerHTML = `
-                <span class="text-xs font-semibold">AI sedang mengetik</span>
+                <span class="text-[11px] font-semibold">AI sedang memproses</span>
                 <div class="flex space-x-1">
                     <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0s"></div>
                     <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
@@ -208,9 +265,7 @@
 
         function removeTypingIndicator() {
             const indicator = document.getElementById('typingIndicator');
-            if (indicator) {
-                indicator.remove();
-            }
+            if (indicator) indicator.remove();
         }
 
         async function sendMessage() {
@@ -221,15 +276,11 @@
 
             if (!message) return;
 
-            // Tampilkan pesan user
             appendMessage(message, true);
             inputEl.value = '';
-            
-            // Disable input sementara loading
             inputEl.disabled = true;
             sendBtn.disabled = true;
             
-            // Munculkan animasi typing
             showTypingIndicator();
 
             try {
@@ -241,26 +292,26 @@
                     },
                     body: JSON.stringify({
                         message: message,
+                        dinas: lokasiDinas,
                         lokasi_dinas: lokasiDinas,
                         conversation_id: conversationId
                     })
                 });
 
                 const data = await response.json();
-                
                 removeTypingIndicator();
 
                 if (response.ok) {
-                    appendMessage(data.answer, false);
+                    appendMessage(data.answer, false, data.source);
                     if (data.conversation_id) {
-                        conversationId = data.conversation_id; // Simpan memori chat
+                        conversationId = data.conversation_id;
                     }
                 } else {
-                    appendMessage("❌ Error: " + (data.error || "Gagal menghubungi API Dify."), false);
+                    appendMessage("❌ Error: " + (data.error || "Gagal memproses pesan."), false);
                 }
             } catch (error) {
                 removeTypingIndicator();
-                appendMessage("❌ Sistem sibuk atau terputus. Coba lagi.", false);
+                appendMessage("❌ Terjadi gangguan jaringan saat menghubungi server.", false);
             } finally {
                 inputEl.disabled = false;
                 sendBtn.disabled = false;
@@ -271,22 +322,23 @@
         async function uploadDocument() {
             const fileInput = document.getElementById('uploadFile');
             const file = fileInput.files[0];
+            const nameInput = document.getElementById('uploadName');
+            const dinasInput = document.getElementById('uploadDinas');
             const uploadBtn = document.getElementById('uploadBtn');
-            const alertBox = document.getElementById('uploadAlert');
 
             if (!file) {
-                showAlert('Silakan pilih file PDF terlebih dahulu.', 'error');
+                showAlert('Silakan pilih file PDF atau TXT terlebih dahulu.', 'error');
                 return;
             }
 
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file_dokumen', file);
+            formData.append('nama_dokumen', nameInput.value || file.name);
+            formData.append('dinas', dinasInput.value);
             formData.append('_token', '{{ csrf_token() }}');
 
-            // Set loading state
             uploadBtn.disabled = true;
             uploadBtn.innerHTML = 'Mengupload...';
-            alertBox.className = 'hidden';
 
             try {
                 const response = await fetch('{{ route("chatbot.upload") }}', {
@@ -297,10 +349,11 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    showAlert(data.success, 'success');
-                    fileInput.value = ''; // Reset form
+                    showAlert(data.message || 'Dokumen berhasil diunggah.', 'success');
+                    fileInput.value = '';
+                    nameInput.value = '';
                 } else {
-                    showAlert(data.error || 'Gagal mengupload file.', 'error');
+                    showAlert(data.error || 'Gagal mengunggah dokumen.', 'error');
                 }
             } catch (error) {
                 showAlert('Terjadi kesalahan jaringan.', 'error');
@@ -313,8 +366,8 @@
         function showAlert(message, type) {
             const alertBox = document.getElementById('uploadAlert');
             alertBox.innerText = message;
-            alertBox.className = `text-sm p-3 rounded-lg mb-4 ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
-            alertBox.style.display = 'block';
+            alertBox.className = `text-xs p-3 rounded-lg mb-2 ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+            alertBox.classList.remove('hidden');
         }
     </script>
 </x-app-layout>
