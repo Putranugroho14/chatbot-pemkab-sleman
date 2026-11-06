@@ -1,110 +1,136 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm">
+<nav x-data="{ open: false }" class="bg-slate-900 border-b border-slate-800 text-white shadow-lg sticky top-0 z-40">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
+            <div class="flex items-center gap-6">
+                <!-- Logo & Brand Identity -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="font-bold text-lg text-indigo-700 flex items-center gap-2">
-                        <span class="text-2xl">🤖</span>
-                        <span>S-Bot Sleman</span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition duration-200">
+                            <span class="text-xl">🏛️</span>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-base tracking-tight text-white block leading-none">
+                                S-Bot <span class="text-indigo-400">Sleman</span>
+                            </span>
+                            <span class="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
+                                Multi-Tenant AI Platform
+                            </span>
+                        </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-6 sm:-my-px sm:ms-8 sm:flex items-center text-sm">
+                <div class="hidden md:flex items-center space-x-1 ms-4 text-xs font-semibold">
                     @if(Auth::user()->isSuperAdmin())
-                        <x-nav-link :href="route('superadmin.dashboard')" :active="request()->routeIs('superadmin.dashboard')">
-                            {{ __('Dashboard Super') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('superadmin.users.index')" :active="request()->routeIs('superadmin.users.*')">
-                            {{ __('Kelola Pengguna') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('superadmin.agents')" :active="request()->routeIs('superadmin.agents')">
-                            {{ __('Status AI Agents') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('superadmin.chat-history')" :active="request()->routeIs('superadmin.chat-history')">
-                            {{ __('Semua Riwayat') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('superadmin.analytics')" :active="request()->routeIs('superadmin.analytics')">
-                            {{ __('Analitik') }}
-                        </x-nav-link>
+                        <a href="{{ route('superadmin.dashboard') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('superadmin.dashboard') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            📊 Dashboard
+                        </a>
+                        <a href="{{ route('superadmin.users.index') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('superadmin.users.*') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            👥 Pengguna
+                        </a>
+                        <a href="{{ route('superadmin.agents') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('superadmin.agents') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            🤖 Status Agents
+                        </a>
+                        <a href="{{ route('superadmin.chat-history') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('superadmin.chat-history') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            📋 Log Audit
+                        </a>
+                        <a href="{{ route('superadmin.analytics') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('superadmin.analytics') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            📈 Analitik
+                        </a>
                     @elseif(Auth::user()->isDinasAdmin())
-                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                            {{ __('Dashboard Dinas') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.staff')" :active="request()->routeIs('admin.staff')">
-                            {{ __('Staff Dinas') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.chat-history')" :active="request()->routeIs('admin.chat-history')">
-                            {{ __('Riwayat Dinas') }}
-                        </x-nav-link>
+                        <a href="{{ route('admin.dashboard') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            🏢 Dashboard Dinas
+                        </a>
+                        <a href="{{ route('admin.staff') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('admin.staff') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            👥 Staff Dinas
+                        </a>
+                        <a href="{{ route('admin.chat-history') }}" 
+                           class="px-3.5 py-2 rounded-lg transition {{ request()->routeIs('admin.chat-history') ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-300 hover:text-white hover:bg-slate-800' }}">
+                            📋 Riwayat Dinas
+                        </a>
                     @endif
 
-                    <!-- Akses Chatbot Simulator -->
-                    <x-nav-link :href="route('chatbot.index')" :active="request()->routeIs('chatbot.index')">
-                        {{ __('Chatbot Simulator') }}
-                    </x-nav-link>
+                    <!-- Simulator Link (Tersedia untuk semua role) -->
+                    <a href="{{ route('chatbot.index') }}" 
+                       class="px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 {{ request()->routeIs('chatbot.index') ? 'bg-emerald-600 text-white shadow-sm' : 'text-emerald-400 hover:text-white hover:bg-slate-800' }}">
+                        <span>💬</span> Chat Simulator
+                    </a>
                 </div>
             </div>
 
-            <!-- Role Badge & Settings Dropdown -->
+            <!-- Role Badge & User Profile -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 gap-3">
-                <!-- Badge Role & Dinas -->
-                <div class="flex items-center gap-2 text-xs">
-                    @if(Auth::user()->isSuperAdmin())
-                        <span class="bg-purple-100 text-purple-800 font-semibold px-2.5 py-1 rounded-full border border-purple-200">
-                            🛡️ Super Admin (Diskominfo)
-                        </span>
-                    @elseif(Auth::user()->isDinasAdmin())
-                        <span class="bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full border border-blue-200">
-                            🏢 Admin {{ strtoupper(Auth::user()->dinas) }}
-                        </span>
-                    @else
-                        <span class="bg-gray-100 text-gray-800 font-semibold px-2.5 py-1 rounded-full border border-gray-200">
-                            👤 Staff {{ strtoupper(Auth::user()->dinas ?? 'Umum') }}
-                        </span>
-                    @endif
-                </div>
+                <!-- Role Badge -->
+                @if(Auth::user()->isSuperAdmin())
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-300 border border-purple-500/30">
+                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                        Super Admin Diskominfo
+                    </span>
+                @elseif(Auth::user()->isDinasAdmin())
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-300 border border-blue-500/30">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                        Admin {{ strtoupper(Auth::user()->dinas) }}
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-700/50 text-slate-300 border border-slate-700">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                        Staff {{ strtoupper(Auth::user()->dinas ?? 'Umum') }}
+                    </span>
+                @endif
 
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                <!-- User Dropdown Menu -->
+                <div class="relative" x-data="{ userMenuOpen: false }">
+                    <button @click="userMenuOpen = !userMenuOpen" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-800 transition focus:outline-none">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 text-white flex items-center justify-center font-bold text-xs uppercase shadow">
+                            {{ substr(Auth::user()->name, 0, 2) }}
+                        </div>
+                        <span class="text-xs font-medium text-slate-200 hidden lg:inline">{{ Auth::user()->name }}</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+                    <div x-show="userMenuOpen" 
+                         @click.outside="userMenuOpen = false"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="absolute right-0 mt-2 w-48 rounded-xl bg-white text-slate-800 shadow-xl border border-slate-100 py-1 z-50">
+                        
+                        <div class="px-4 py-2 border-b border-slate-100 text-xs">
+                            <p class="font-semibold text-slate-900 truncate">{{ Auth::user()->name }}</p>
+                            <p class="text-slate-400 truncate">{{ Auth::user()->email }}</p>
+                        </div>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 transition">
+                            <span>👤</span> Profil Akun
+                        </a>
 
-                        <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-xs text-red-600 hover:bg-red-50 text-left transition">
+                                <span>🚪</span> Keluar (Log Out)
+                            </button>
                         </form>
-                    </x-slot>
-                </x-dropdown>
+                    </div>
+                </div>
             </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+            <!-- Hamburger Button for Mobile -->
+            <div class="-me-2 flex items-center md:hidden">
+                <button @click="open = !open" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path :class="{'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -112,55 +138,23 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-x-0 space-y-1">
-            @if(Auth::user()->isSuperAdmin())
-                <x-responsive-nav-link :href="route('superadmin.dashboard')" :active="request()->routeIs('superadmin.dashboard')">
-                    {{ __('Dashboard Super') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('superadmin.users.index')" :active="request()->routeIs('superadmin.users.*')">
-                    {{ __('Kelola Pengguna') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('superadmin.agents')" :active="request()->routeIs('superadmin.agents')">
-                    {{ __('Status AI Agents') }}
-                </x-responsive-nav-link>
-            @elseif(Auth::user()->isDinasAdmin())
-                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                    {{ __('Dashboard Dinas') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.staff')" :active="request()->routeIs('admin.staff')">
-                    {{ __('Staff Dinas') }}
-                </x-responsive-nav-link>
-            @endif
-
-            <x-responsive-nav-link :href="route('chatbot.index')" :active="request()->routeIs('chatbot.index')">
-                {{ __('Chatbot Simulator') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
+    <div :class="{'block': open, 'hidden': !open}" class="hidden md:hidden bg-slate-950 border-t border-slate-800 p-4 space-y-2 text-sm">
+        @if(Auth::user()->isSuperAdmin())
+            <a href="{{ route('superadmin.dashboard') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Dashboard</a>
+            <a href="{{ route('superadmin.users.index') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Kelola Pengguna</a>
+            <a href="{{ route('superadmin.agents') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Status Agents</a>
+            <a href="{{ route('superadmin.chat-history') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Semua Riwayat</a>
+        @elseif(Auth::user()->isDinasAdmin())
+            <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Dashboard Dinas</a>
+            <a href="{{ route('admin.staff') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Staff Dinas</a>
+            <a href="{{ route('admin.chat-history') }}" class="block px-3 py-2 rounded-lg hover:bg-slate-800">Riwayat Dinas</a>
+        @endif
+        <a href="{{ route('chatbot.index') }}" class="block px-3 py-2 rounded-lg text-emerald-400 hover:bg-slate-800 font-semibold">💬 Chat Simulator</a>
+        <div class="pt-3 border-t border-slate-800">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-xs text-red-400 font-semibold px-3 py-1">Keluar (Log Out)</button>
+            </form>
         </div>
     </div>
 </nav>
